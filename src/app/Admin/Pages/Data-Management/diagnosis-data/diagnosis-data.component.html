@@ -1,0 +1,88 @@
+<mat-toolbar class="header" style="background-color: white;">
+
+  <div class="header__title">
+    <!-- <h6 class="header__title-text" style="color: black;font-weight: 700;">CT Hospital</h6> -->
+  </div>
+
+  <div class="header-toolbar">
+       <button mat-raised-button (click)="openDialog()" color="primary">Add New Diagnosis</button> 
+
+  </div>
+
+</mat-toolbar>
+<br>
+    <br>
+    <br>
+    <br>
+    <div class="tables-wrapper">
+
+        <mat-card class="employee-table-wrapper">
+            <mat-card-title class="employee-table-wrapper__header">
+              <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Diagnosis Data</p>
+              <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+                <div class="employee-table-wrapper__icon-wrapper">
+                  <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+                </div>
+                <!-- <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+                  <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
+                </button> -->
+              </div>
+              <!-- <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+                <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+              </button> -->
+            </mat-card-title>
+            <mat-card-content class="employee-table__content">
+              <table class="employee-table__table" mat-table [dataSource]="dataSource">
+          
+                <!-- Name Column -->
+                <ng-container matColumnDef="DiagnosisID" >
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef > DiagnosisId </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.diagnosisID}} </td>
+                </ng-container>
+          
+                <!-- Company Column -->
+                <ng-container matColumnDef="DCode">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Diagnosis Code</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.dcode}} </td>
+                </ng-container>
+          
+                <!-- City Column -->
+                <ng-container matColumnDef="DDescription">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Diagnosis Description </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.dDescription}} </td>
+                </ng-container>
+        
+                  <ng-container matColumnDef="IsDeprecated">
+                    <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> IsDepricated </th>
+                    <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.isDepricated}} </td>
+                  </ng-container>
+                           
+                <!-- <ng-container matColumnDef="Edit">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Edit </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.state}} </td>
+                </ng-container> -->
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-card-content>
+            <div class="pagination">
+              <mat-paginator [pageSizeOptions]="[10, 15, 100]" showFirstLastButtons></mat-paginator>
+            </div>
+          </mat-card>
+   
+    </div>
+  
+    <!-- <app-footer></app-footer> -->
+
+
+
+
+
+
+
+
+
+
+
+  

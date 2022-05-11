@@ -1,0 +1,48 @@
+<mat-toolbar color="primary">
+    <span class="title-center">Add New Allergy</span>
+  </mat-toolbar>
+  
+  <form class="form" [formGroup]="form" (ngSubmit)="sign()">
+    <br>
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Allergy Id</mat-label>
+        <input matInput formControlName="aid">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Allergy Type</mat-label>
+        <select matNativeControl formControlName="allergy_type">
+          <option value="" selected></option>
+          <option value="Mite">Mite</option>
+          <option value="Food">Food</option>
+          <option value="Other">Other</option>
+        </select>
+      </mat-form-field>
+  
+      <mat-form-field  appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Allergy Name</mat-label>
+        <input matInput formControlName="allergy_name">
+      </mat-form-field>
+
+      <mat-form-field  appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Allergy Source</mat-label>
+        <input matInput formControlName="allergy_source">
+      </mat-form-field>
+  
+      
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Allergy Inicity</mat-label>
+        <input matInput formControlName="allerginicity">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>ISO Forms Of Partial Of Allergy</mat-label>
+        <input matInput formControlName="iso_forms_of_partial_of_allergen">
+      </mat-form-field>
+    
+      <div class="form-actions">
+        <button class="form-actions__create" mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </form>
+    
+  

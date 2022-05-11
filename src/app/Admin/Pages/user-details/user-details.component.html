@@ -1,0 +1,140 @@
+<mat-progress-bar *ngIf="apistarts"  mode="indeterminate"></mat-progress-bar>
+<div class="content-users" style="padding: 15px; " fxLayout="row" fxLayout="row wrap" >
+    <mat-card  class="visit-card">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel-header  class="details-header">
+                <mat-panel-title>
+                Personal data
+                </mat-panel-title>
+                <mat-panel-description>
+              
+                <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <form style="margin: 2%" [formGroup]="firstFormGroup">
+
+                <div class="row">
+
+                    <div  class="input-group mb-3">
+                        <label>Title</label>
+                        <div class="input-group mb-3 text-wrap" style="width: 100%;">
+                            <mat-radio-group 
+                            class="input redio-btn-content" 
+                            style="font-weight: 400;"
+                             formControlName="title" id="Title"
+                              [ngClass]="{ 'is-invalid': submitted && firstFormGroup.controls['title']?.errors }">
+                              <mat-radio-button value="Mr">Mr.</mat-radio-button>
+                              <mat-radio-button  *ngIf="UsersRole" value="Dr">Dr.</mat-radio-button>
+                              <mat-radio-button value="Mrs">Mrs.</mat-radio-button>
+                              <mat-radio-button value="Ms">Ms.</mat-radio-button>
+                            </mat-radio-group>
+                        </div>    
+                        <div *ngIf="submitted && firstFormGroup.controls['title']?.errors" class="invalid-feedback">
+                            <div *ngIf="firstFormGroup.controls['title']?.errors?.['required']">Title is required</div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label for="name">First Name  *</label>
+                        <div *ngIf="submitted && firstFormGroup.controls['firstName']?.errors" class="invalid-feedback">
+                            <div *ngIf="firstFormGroup.controls['firstName']?.errors?.['required']">First name cannot be empty</div>
+                            <div *ngIf="firstFormGroup.controls['firstName']?.errors">First Name must be at least 2 characters long.</div>
+                        </div>
+                        <input type="text" placeholder="First Name" required="" 
+                        class="form-control input" type="text" id="FirstName" 
+                        formControlName="firstName"
+                        [ngClass]="{ 'is-invalid': submitted && firstFormGroup.controls['firstName']?.errors }"
+                         required matInput  value="{{UserDetails?.firstName}}">
+                        
+                    </div>
+
+                    
+                    
+                    <div class="input-group mb-3">
+                        <label for="name">Last Name</label>
+                        <div *ngIf="submitted && firstFormGroup.controls['lastName']?.errors" class="invalid-feedback">
+                            <div *ngIf="firstFormGroup.controls['lastName']?.errors?.['required']">Last name cannot be empty</div>
+                            <div *ngIf="firstFormGroup.controls['lastName']?.errors"> Last Name must be at least 2 characters long.</div>
+                        </div>
+                        <input type="text" placeholder="Last Name" required="" 
+                        class="form-control input" type="text" id="LastName" 
+                        formControlName="lastName"
+                        [ngClass]="{ 'is-invalid': submitted && firstFormGroup.controls['lastName']?.errors }"
+                        required matInput value="{{UserDetails?.lastName}}"> 
+                        
+                    </div>
+                    <div class="input-group mb-3 ">
+                        <div *ngIf="submitted && firstFormGroup.controls['dob']?.errors" class="invalid-feedback">
+                            <div *ngIf="firstFormGroup.controls['dob']?.errors?.['required']">Please enter a valid date</div>
+                       </div>
+                        <label for="name">Date of Birth</label>
+                        <input id="date-input" type="date" name="date-input" id="DOB"
+                        style="font-family: Roboto,Helvetica Neue, sans-serif;" 
+                        formControlName="dob"
+                        required matInput placeholder="date" 
+                        value="{{UserDetails?.dob}}"
+                        class="form-control">
+                    </div>
+
+                    <div class="input-group mb-3" style="width: 48%;">
+                        <label for="name">Email</label>
+                        <div *ngIf="submitted && firstFormGroup.controls['email']?.errors" class="invalid-feedback">
+                            <div *ngIf="firstFormGroup.controls['email']?.errors?.['required']">Email cannot be empty</div>
+                            <div *ngIf="firstFormGroup.controls['email']?.errors" style="color: red;">Email must be a valid Email address</div>
+                        </div>
+                        <input type="text" placeholder="Email" 
+                        class="form-control input"
+                        formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted && firstFormGroup.controls['email']?.errors }"
+                        type="email"
+                         id="email"
+                         matInput value="{{UserDetails?.email}}"
+                         [readonly]=true>
+                    </div>
+                    <div class="input-group mb-3" style="width: 48%;">
+                        <label for="name">Contact Number </label>
+                        <div *ngIf="submitted && firstFormGroup.controls['phone']?.errors" class="invalid-feedback">
+                            <div *ngIf="firstFormGroup.controls['phone']?.errors?.['required']">Contact Number cannot be empty</div>
+                         </div>
+                        <input type="text" placeholder="Contact Number" 
+                        class="form-control input"
+                        formControlName="phone"
+                         type="text" id="ContactNumber"
+                         [ngClass]="{ 'is-invalid': submitted && firstFormGroup.controls['phone']?.errors }"
+                        required matInput value="{{UserDetails?.phone}}">
+                    </div>
+
+                    <div class="input-group mb-3" style="width: 48%;" *ngIf="UsersRole">
+                        <label>Role</label>
+                        <div *ngIf="submitted && firstFormGroup.controls['RoleId']?.errors" class="invalid-feedback">
+                            <div *ngIf="firstFormGroup.controls['RoleId']?.errors?.['required']">Role is required</div>
+                        </div>
+                        <select formControlName="roleId"
+                         class="form-control"
+                          [ngClass]="{ 'is-invalid': submitted && firstFormGroup.controls['RoleId']?.errors }">
+                            <option value="0"></option>
+                            <option value="2">Physician </option>
+                            <option value="3">Nurse </option>
+                            <option value="1">Admin</option>
+                        </select>
+                        
+                    </div> 
+                    
+                </div>
+                
+                
+                
+               
+           </form>
+            <mat-action-row>
+                <button mat-button color="warn" [routerLink]="['/Admin/Dashboard']" >Back</button>
+                <button class="demographics-submit" (click)="userdetailsSubmit()" mat-button color="primary" >Update</button>
+            </mat-action-row>
+            </mat-expansion-panel>
+        
+        
+        </mat-accordion>
+</mat-card>
+</div>

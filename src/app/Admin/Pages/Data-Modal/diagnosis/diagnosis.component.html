@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <span class="title-center">Add New Diagnosis</span>
+  </mat-toolbar>
+  
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+    <br>
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Diagnosis Code</mat-label>
+        <input matInput formControlName="Dcode" placeholder="eg. N'A1814'">
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Diagnosis Description</mat-label>
+        <input matInput formControlName="DDescription">
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="IsDepricated">Diagnosis Is Depricated</mat-slide-toggle>
+      
+      <br>
+      <br>
+     
+      <div class="form-actions">
+        <button class="form-actions__create" mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </form>
+    
+  

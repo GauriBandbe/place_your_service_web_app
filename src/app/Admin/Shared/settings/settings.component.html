@@ -1,0 +1,44 @@
+<h2 mat-dialog-title class="change-title">Change Password</h2>
+<mat-dialog-content class="mat-typography">
+    <form fxLayout="column" class="change-form" fxLayoutAlign="start stretch" [formGroup]="pwChangeForm" (ngSubmit)="ChangePassword()">
+       
+        <div class="input-group mb-4 form-group">
+            <mat-label>Current Password</mat-label>
+            <input [type]="hide ? 'password' : 'text'" 
+             placeholder="Enter Current Password" autocomplete="Previous-Password" 
+            class="form-control input" id="PreviousPassword" 
+            formControlName="PreviousPassword" required matInput>
+        </div>
+        <div class="visible-icon">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </div>
+        <div class="input-group mb-4 form-group">
+            <mat-label>New Password</mat-label>
+            <input [type]="hidetwo ? 'password' : 'text'"  
+            placeholder="Enter New Password" autocomplete="Current-Password" 
+            class="form-control input" id="CurrentPassword" 
+            formControlName="CurrentPassword" required matInput>
+        </div>
+        <div class="visible-icon">
+            <mat-icon matSuffix (click)="hidetwo = !hidetwo">{{hidetwo ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </div>
+        <div class="input-group mb-4 form-group">
+            <mat-label>Confirm Password</mat-label>
+            <input [type]="hidethree ? 'password' : 'text'"  placeholder="Enter Confirm Password" autocomplete="confirm-password"
+            class="form-control input" id="confirmpassword" 
+            formControlName="confirmpassword" required matInput>
+         <p *ngIf="confirmvalidation">Password and Confirm Password must be match.</p>
+           
+        </div>
+        <div class="visible-icon">
+            <mat-icon matSuffix (click)="hidethree = !hidethree">{{hidethree ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </div>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close>Cancel</button>
+            <!-- <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Change Password</button> -->
+            <button [mat-dialog-close]="true"  mat-raised-button color="primary" class="btn-primary"
+            type="submit" [disabled]="!pwChangeForm.valid">Submit</button>
+        </mat-dialog-actions>
+    </form>
+</mat-dialog-content>
+

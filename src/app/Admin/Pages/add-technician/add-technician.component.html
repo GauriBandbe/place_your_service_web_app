@@ -1,0 +1,211 @@
+<mat-progress-bar *ngIf="loginstarts"  mode="indeterminate"></mat-progress-bar>
+<html class="isEmbedded ">
+<body>
+    <mat-card-title>
+        <div class="title-section" style="margin-top: 2%;margin-left: 3%;">
+          <mat-icon class="maticon" style="font-weight: 500;" routerLink="/Admin/TechnicianList">arrow_back</mat-icon>  
+          <span class="form-title" style="color:#ED8F2D !important;font-weight: 500; font-family: Roboto;
+          margin-left: 2%;line-height: 175%;font-size: smaller;"> Technician Details</span>
+          <span class="name role-name" fxHide fxShow.gt-xs></span>
+          
+        </div>  
+        
+      </mat-card-title>   
+    <div class="card m-3 mat-elevation-z8">
+         <div class="card-body">
+             
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row">
+                         <div style="text-align:center">
+                            <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+                            <div><img [src]="url" *ngIf="url" style="max-width: 25%;"></div>
+                            <p>
+                                <input type="file" (change)="selectFile($event)">
+                            </p>
+                        </div> 
+                        <div class="form-group col">
+                            <label>Title</label>
+                            <div class="input-group mb-3 text-wrap" style="width: 100%;">
+                                <mat-radio-group class="input" style="font-weight: 400;" formControlName="titleCode" id="titleCode" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['titleCode']?.errors }">
+                                  <mat-radio-button value=1>Mr.</mat-radio-button>
+                                  <mat-radio-button value=2>Mrs.</mat-radio-button>
+                                  <mat-radio-button value=3>Ms.</mat-radio-button>
+                                </mat-radio-group>
+                            </div>    
+                            <div *ngIf="submitted && registerForm.controls['titleCode']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['titleCode']?.errors?.['required']">Title is required</div>
+                            </div>
+                        </div> 
+                        <div class="form-group col">
+                            <label>Gender</label>
+                            <select formControlName="gender" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['gender']?.errors }">
+                                <option value="0"></option>
+                                <option value="M">Male </option>
+                                <option value="F">Female </option>
+                                <option value="T">Transgender</option>
+                            </select>
+                            <div *ngIf="submitted && registerForm.controls['gender']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['gender']?.errors?.['required']">Gender is required</div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="form-row">                       
+                        <div class="form-group col">
+                            <label>First Name</label>
+                            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['firstName']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['firstName']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['firstName']?.errors?.['required']">First Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Middle Name</label>
+                            <input type="text" formControlName="middleName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['middleName']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['middleName']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['middleName']?.errors?.['required']">Middle Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Last Name</label>
+                            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['lastName']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['lastName']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['lastName']?.errors?.['required']">Last Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                         <div class="form-group col">
+                            <label>Date of Birth</label>
+                            <input type="date" formControlName="date_of_Birth" class="form-control"  max={{latest_date}}
+                            style="font-family: Roboto,Helvetica Neue, sans-serif;" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['date_of_Birth']?.errors }" >
+                             <div *ngIf="submitted && registerForm.controls['date_of_Birth']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['date_of_Birth']?.errors?.['required']">Date of Birth is required</div>
+                                <div *ngIf="registerForm.controls['date_of_Birth']?.errors?.['min']">Date of Birth is required</div>
+                                
+                             </div>
+                             
+                        </div> 
+                        <div class="form-group col">
+                            <label>Email</label>
+                            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['email']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['email']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['email']?.errors?.['required']">Email is required</div>
+                                <div *ngIf="registerForm.controls['email']?.errors?.['email']">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Contact No</label>
+                            <input type="text" formControlName="mobile_1" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['mobile_1']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['mobile_1']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['mobile_1']?.errors?.['required']">Contact No is required</div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Blood Group</label>
+                            <input type="text" formControlName="bloodGroup_Code" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['bloodGroup_Code']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['bloodGroup_Code']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['bloodGroup_Code']?.errors?.['required']">blood Group Type is required</div>
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-row">                       
+                        <div class="form-group col">
+                            <label>Address</label>
+                            <input type="text" formControlName="Address" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['Address']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['Address']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['Address']?.errors?.['required']">Address is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Address2/ Street</label>
+                            <input type="text" formControlName="Address2" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['Address2']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['Address2']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['Address2']?.errors?.['required']">Address2 is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>City</label>
+                            <input type="text" formControlName="City" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['City']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['City']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['City']?.errors?.['required']">City Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>State</label>
+                            <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['state']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['state']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['state']?.errors?.['required']">State Name is required</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-row">
+                        <div style="text-align:center">
+                           <div [innerHtml]='msg2' *ngIf="msg2" style="color: red;"></div>
+                           <div><img [src]="url2" *ngIf="url2" style="max-width: 25%;"></div>
+                           <p>
+                               <input type="file" (change)="selectFile2($event)">
+                           </p>
+                       </div> 
+                       <div style="text-align:center">
+                        <div [innerHtml]='msg3' *ngIf="msg3" style="color: red;"></div>
+                        <div><img [src]="url3" *ngIf="url3" style="max-width: 25%;"></div>
+                        <p>
+                            <input type="file" (change)="selectFile3($event)">
+                        </p>
+                    </div> 
+                       
+                   </div>
+                    <!-- <div class="form-row">
+                        
+                     
+                         <div class="form-group  col">
+                            <label>Employee ID</label>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['EmployeeID']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['EmployeeID']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['EmployeeID']?.errors?.['required']">Last Name is required</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="form-row">
+                        <div class="form-group col">
+                            <label>Password</label>
+                            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['password']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['password']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['password']?.errors?.['required']">Password is required</div>
+                                <div *ngIf="registerForm.controls['password']?.errors?.['minlength']">Password must be at least 8 characters</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Confirm Password</label>
+                            <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['confirmPassword']?.errors }">
+                            <div *ngIf="submitted && registerForm.controls['confirmPassword']?.errors" class="invalid-feedback">
+                                <div *ngIf="registerForm.controls['confirmPassword']?.errors?.['required']">Confirm Password is required</div>
+                                <div *ngIf="registerForm.controls['confirmPassword']?.errors?.['mustMatch']">Passwords must match</div>
+                            </div>
+                        </div>
+                    </div> -->
+                   
+                    <div style="text-align: right!important;">
+                        <button style="background-color: #ED8F2D;color: #fff;border: 1px solid transparent;margin-right: 0.25rem!important;
+                        border: 1px solid transparent;
+                        padding: 0.375rem 0.75rem;
+                        font-size: 1rem;
+                        line-height: 1.5;
+                        border-radius: 0.25rem;">Upload Details</button>
+                        <button style="background-color:red;color: #fff;border: 1px solid transparent;
+                        border: 1px solid transparent;
+                        padding: 0.375rem 0.75rem;
+                        font-size: 1rem;
+                        line-height: 1.5;
+                        border-radius: 0.25rem;" type="reset" (click)="onReset()">Cancel</button>
+                    </div>
+                    
+                </form>
+        </div>
+    </div> 
+</body>
+
+</html>

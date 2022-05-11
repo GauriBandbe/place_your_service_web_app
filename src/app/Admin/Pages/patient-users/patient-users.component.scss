@@ -1,0 +1,44 @@
+.add-patient-btn
+{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 2%;
+    padding-right: 10px;
+    button{
+        background-color: #ff4081;
+        color: white;
+        width: 150px;
+        height: 40px;
+        position: inherit;
+        display: inline-flex;
+    }
+
+    .maticon
+    {
+      
+        font-size: large;
+        padding-top: 10px;
+        
+    }
+
+   
+    span{
+        position: absolute;
+        margin-top: 2px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    
+    .patient-email-container{
+        display: none;
+    }
+        .mattable-container{
+            width: 99%;
+
+
+            table{
+                width: 100%;
+            }
+        }
+}

@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+    <span class="title-center">Add New Procedure</span>
+  </mat-toolbar>
+  
+  <form class="form" [formGroup]="form" (ngSubmit)="sign()">
+    <br>
+      <mat-form-field  appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Procedure Code</mat-label>
+        <input matInput formControlName="Pcode">
+      </mat-form-field>
+      
+      <mat-form-field  appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Procedure Description</mat-label>
+        <input matInput formControlName="PDescription">
+      </mat-form-field>
+
+  
+        <mat-slide-toggle formControlName="Pisdepricated">Diagnosis Is Depricated</mat-slide-toggle>    
+      <br>
+      <br>  
+      <div class="form-actions">
+        <button class="form-actions__create" mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </form>
+    
+  

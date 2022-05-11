@@ -1,0 +1,102 @@
+<div style="margin-left: 10px;margin-right: 10px;">
+  <mat-card-title>
+      <div class="title-section">
+        <mat-icon class="maticon" style="font-weight: 500;margin-top: 1%;">arrow_back</mat-icon>  
+        <span class="form-title" style="color:#ED8F2D !important;font-weight: 500; font-family: Roboto;
+        margin-left: 2%;line-height: 175%;"> Technician Details</span>
+        <span class="name role-name" fxHide fxShow.gt-xs></span>
+        <div class="add-patient-btn" >
+          <button  mat-flat-button 
+          routerLink="/Admin/CreateTechnician">
+          
+            <mat-icon class="maticon" >supervisor_account</mat-icon>  
+            <span>
+             Add Technician 
+            </span> 
+            
+          
+          </button>
+     </div>
+      </div>  
+      
+    </mat-card-title>    
+    <div class="example-small-box">
+ 
+  <mat-form-field appearance="standard" style="width: 100%;display: none;">
+    <mat-label>Search Here...</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+  
+  <div class="mattable-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="" matSort matSortActive="created" matSortDisableClear matSortDirection="desc" style="width: 100%;">
+  
+     
+      <ng-container matColumnDef="userCode">
+        <th  mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let row"> {{row.userCode}} </td>
+      </ng-container>
+  
+      
+      <ng-container matColumnDef="Profile">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="patient-email-container"> Profile </th>
+        <td mat-cell *matCellDef="let row" class="patient-email-container"> <img [src]="'./assets/images/Technician/technician_1.png'" style="margin-top: 5%;"/></td>
+      </ng-container>
+  
+      <!-- <ng-container matColumnDef="Profile">
+        <mat-header-cell *matHeaderCellDef> Profile </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <img [src]="row.profile"/>
+        </mat-cell>
+      </ng-container> -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row">{{row.technicianName}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Mobile No">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile No </th>
+        <td mat-cell *matCellDef="let row"> {{row.mobile_1}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="Adhar No">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Adhar No </th>
+        <td mat-cell *matCellDef="let row"> {{row.uidaI_Aadhar}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Adhar status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Adhar Status </th>
+        <td mat-cell *matCellDef="let row"> {{row.isAdminApproved}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button aria-label="Example icon button with a home icon"
+          
+           [disabled]="row.account !=true?'true':'false'">
+           <mat-icon style="color:black;font-size: medium;padding-top: 5px;" > more_vert</mat-icon>
+           <mat-icon style="color:black;font-size: medium;padding-top: 5px;margin-left: -19px;" > more_vert</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <!-- [routerLink]="['/Admin/UserDetails/',row.userKey]" -->
+      <!-- <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-slide-toggle [checked]="(row.account)" (change)="toggle($event , row.userKey)">
+          </mat-slide-toggle>
+        </td>
+      </ng-container> -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+    </div>
+</div>  
+

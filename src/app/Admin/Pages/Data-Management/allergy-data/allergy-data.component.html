@@ -1,0 +1,106 @@
+<!-- class="page-header" role="heading" -->
+      <!-- <mat-toolbar> -->
+        <!-- <h1>Master Data Management</h1> -->
+  
+        <!-- <button mat-raised-button (click)="openDialog()" color="primary">Add New Allergy</button>
+        <span class="flexExpand"></span>
+        <h1 style="align-content: center;margin-left: 0;margin-right: 0;float:initial;">Master Data Management</h1>
+      </mat-toolbar> -->
+     <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
+     
+     <mat-toolbar class="header" style="background-color: white;">
+
+      <div class="header__title">
+        <!-- <h6 class="header__title-text" style="color: black;font-weight: 700;">CT Hospital</h6> -->
+      </div>
+    
+      <div class="header-toolbar">
+           <button mat-raised-button (click)="openDialog()" color="primary">Add New Allergy</button> 
+
+      </div>
+    
+    </mat-toolbar>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    
+      <!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- [employeeTableData]="employeeTableData$ | async" -->
+    <div class="tables-wrapper">
+      <!-- <app-employee-table> -->
+
+        <mat-card class="employee-table-wrapper">
+            <mat-card-title class="employee-table-wrapper__header">
+              <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Allergy Data</p>
+              <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+                <div class="employee-table-wrapper__icon-wrapper">
+                  <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+                </div>
+               
+              </div>
+            
+            </mat-card-title>
+            <mat-card-content class="employee-table__content">
+              <table class="employee-table__table" mat-table [dataSource]="dataSource">
+          
+                <!-- Checkbox Column -->
+              
+          
+                <!-- Name Column -->
+                <ng-container matColumnDef="aid" >
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef >Allergy Id</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.aid}} </td>
+                </ng-container>
+          
+                <!-- Company Column -->
+                <ng-container matColumnDef="allergy_type">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Allergy Type</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.allergy_type}} </td>
+                </ng-container>
+          
+                <!-- City Column -->
+                <ng-container matColumnDef="allergy_name">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Allergy name</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.allergy_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="allergy_source">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Allergy Source</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.allergy_source}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="allerginicity">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Allerginicity</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.allerginicity}} </td>
+                </ng-container>
+                <ng-container matColumnDef="iso_forms_of_partial_of_allergen">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>ISO Forms</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.iso_forms_of_partial_of_allergen}} </td>
+                </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-card-content>
+            <div class="pagination">
+              <mat-paginator [pageSizeOptions]="[10, 15, 100]" showFirstLastButtons></mat-paginator>
+            </div>
+          </mat-card>
+     
+    </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+  

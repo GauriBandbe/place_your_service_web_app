@@ -1,0 +1,153 @@
+
+    <mat-toolbar class="header" style="background-color: white;">
+
+      <div class="header__title">
+        <!-- <h6 class="header__title-text" style="color: black;font-weight: 700;">CT Hospital</h6> -->
+      </div>
+    
+      <div class="header-toolbar">
+           <button mat-raised-button (click)="openDialog()" color="primary">Add New Mediaction</button> 
+
+      </div>
+    
+    </mat-toolbar>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- [employeeTableData]="employeeTableData$ | async" -->
+    <div class="tables-wrapper">
+      <!-- <app-employee-table> -->
+
+        <mat-card class="employee-table-wrapper">
+            <mat-card-title class="employee-table-wrapper__header">
+              <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Medication Data</p>
+              <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+                <div class="employee-table-wrapper__icon-wrapper">
+                  <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+                </div>
+                <!-- <input matInput class="employee-table-wrapper__search-input" (keyup)="applyFilter($event)"> -->
+                <!-- <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+                  <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
+                </button> -->
+              </div>
+              <!-- <button class="employee-table-wrapper__button" mat-mini-fab (click)="showFilterInput()">
+                <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+              </button> -->
+            </mat-card-title>
+            <mat-card-content class="employee-table__content">
+              <table class="employee-table__table" mat-table [dataSource]="dataSource">
+          
+                <!-- Checkbox Column -->
+                <!-- <ng-container matColumnDef="select">
+                  <th class="employee-table__table-checkbox" mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox
+                      color="primary"
+                      (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                  </th>
+                  <td class="employee-table__table-checkbox" mat-cell *matCellDef="let row">
+                    <mat-checkbox
+                      color="primary"
+                      (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container> -->
+          
+                <!-- Name Column -->
+                <ng-container matColumnDef="drug_id" >
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef > Drug_Id </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.drug_id}} </td>
+                </ng-container>
+          
+                <!-- Company Column -->
+                <ng-container matColumnDef="drug_name">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Drug Name </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.drug_name}} </td>
+                </ng-container>
+          
+                <!-- City Column -->
+                <ng-container matColumnDef="drug_generic_name">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef>Drug Generic Name</th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.drug_generic_name}} </td>
+                </ng-container>
+          
+                <!-- State Column -->
+                <ng-container matColumnDef="drug_brand_name">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Drug Manufacturer Name </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.drug_brand_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="drug_form">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Drug Form </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.drug_form}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="drug_strength">
+                  <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Drug Form </th>
+                  <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.drug_strength}} </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="Edit">
+                    <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Edit </th>
+                    <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.state}} </td>
+                  </ng-container> -->
+          
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-card-content>
+            <div class="pagination">
+              <mat-paginator [pageSizeOptions]="[10, 15, 100]" showFirstLastButtons></mat-paginator>
+            </div>
+          </mat-card>
+      <!-- </app-employee-table> -->
+      <!-- <app-material-table [materialTableDate]="materialTableData$ | async">
+        <mat-card class="material-table">
+            <mat-card-title class="material-table__header">
+              <h5 class="material-table__title">Material-UI Table</h5>
+              <app-settings-menu></app-settings-menu>
+            </mat-card-title>
+          
+            <mat-card-content class="material-table__content">
+              <table mat-table [dataSource]="dataSource" class="material-table__table">
+                <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column}}" class="material-table__table-row">
+                  <th mat-header-cell *matHeaderCellDef class="material-table__table-row-title">{{column}}</th>
+                  <td mat-cell *matCellDef="let element" class="material-table__table-content">
+                    <span *ngIf="column !== 'status'">{{element[column]}}</span>
+                    <div *ngIf="column === 'status'" class="material-table__content-badge" [ngClass]="element[column]">
+                      <span>{{element[column]}}</span>
+                    </div>
+                  </td>
+                </ng-container>
+          
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-card-content>
+          </mat-card>
+          
+          
+      </app-material-table> -->
+    </div>
+  
+    <!-- <app-footer></app-footer> -->
+
+
+
+
+
+
+
+
+
+
+
+
+  

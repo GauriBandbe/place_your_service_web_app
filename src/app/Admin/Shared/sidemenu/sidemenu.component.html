@@ -1,0 +1,15 @@
+
+<div fxLayout="column" >
+    <!-- <div *ngIf="!iconOnly" fxLayoutAlign="space-around center" [style.margin]="'10px 0px'" >
+      <img width="100" [style.borderRadius]="'50%'" src="./assets/images/a3.png">
+    </div>
+    
+    <div *ngIf="iconOnly" style="height: 100px;" fxLayoutAlign="space-around center"  >
+        <img width="50" [style.borderRadius]="'50%'" src="./assets/images/a3.png">
+    </div>
+    <div style="height: 20px;margin-bottom: 2%" fxLayoutAlign="space-around center"  >
+      <h4 style="color: white;">Admin</h4>
+    </div> -->
+    <app-sidemenu-item  *ngFor="let menu of menus" [menu]="menu" [iconOnly]="iconOnly"
+    > </app-sidemenu-item>
+</div>

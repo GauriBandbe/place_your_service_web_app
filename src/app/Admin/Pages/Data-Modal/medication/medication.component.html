@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+    <span class="title-center">Add New Medication</span>
+  </mat-toolbar>
+  <form class="form" [formGroup]="form" (ngSubmit)="sign()">
+    <br>
+    <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+      <mat-label>Drug Id</mat-label>
+      <input matInput formControlName="drug_id">
+    </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Drug name</mat-label>
+        <input matInput formControlName="drug_name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Drug Generic name</mat-label>
+        <input matInput formControlName="drug_generic_name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Drug Manufacturer</mat-label>
+        <input matInput formControlName="drug_brand_name">
+      </mat-form-field>
+      <mat-form-field  appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Drug Form</mat-label>
+        <input matInput formControlName="drug_form">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%;background-color: white; font-size: 13px;" height="0.2em">
+        <mat-label>Drug Strength</mat-label>
+        <input matInput formControlName="drug_strength">
+      </mat-form-field>
+      <div class="form-actions">
+        <button class="form-actions__create" mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </form>
+    
+  
