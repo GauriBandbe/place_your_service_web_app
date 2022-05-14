@@ -97,6 +97,7 @@ label {
     display: inline-block;
     margin-bottom: 0.5rem;
     font-weight: 400;
+    color: #5c6873;
 }
 .form-control.is-invalid {
     border-color: #dc3545;
@@ -119,7 +120,7 @@ label {
     color: #5c6873;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #e4e7ea;
+    border: 1.5px solid #e4e7ea;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -197,3 +198,135 @@ button, input, optgroup, select, textarea {
     font-weight: 400;
   }
   
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    // margin-right: -15px;
+    // margin-left: -15px;
+}
+.col-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+    position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+  .col-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+  }
+
+
+  //*************For Image
+  p {
+    font-family: Lato;
+  }
+  
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 3%;
+  }
+  .hoverable{
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 200px;
+    width: 200px;
+    border: 1px solid #C4C4C4;
+    border-radius: 3%;
+  }
+  .hoverable .hover-text{
+    position: absolute;
+    display: none;
+    top: 50%;
+    left:  50%;
+    transform: translate(-50%,-50%);   
+    z-index: 2;
+  }
+  .hoverable .background{
+    position: absolute;
+    display: none;
+    top: 0;
+    left:  0;
+    bottom: 0;
+    right: 0;
+    background-color:rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    border-radius: 3%;
+    z-index: 1;
+  }
+  .hoverable:hover .hover-text{
+    display: block;
+  }
+  .hoverable:hover .background{
+    display: block;
+  }
+  
+  #fileInput{
+    display: none;
+  }
+  //End For image
+
+//*************For adhar Image
+
+  .img2 {
+    height: 100%;
+    width: 100%;
+    border-radius: 3%;
+  }
+  .hoverable2{
+    position: relative;
+    display: block;
+    cursor: pointer;
+    height: 150px;
+    width: 293px;
+    border: 1px solid #C4C4C4;
+    border-radius: 3%;
+  }
+  .hoverable2 .hover-text{
+    position: absolute;
+    display: none;
+    top: 50%;
+    left:  50%;
+    transform: translate(-50%,-50%);   
+    z-index: 2;
+  }
+  .hoverable2 .background{
+    position: absolute;
+    display: none;
+    top: 0;
+    left:  0;
+    bottom: 0;
+    right: 0;
+    background-color:rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 1;
+    border-radius: 3%;
+  }
+  .hoverable2:hover .hover-text{
+    display: block;
+  }
+  .hoverable:hover .background{
+    display: block;
+  }
+  
+  #fileInput2{
+    display: none;
+  }
+  #fileInput3{
+    display: none;
+  }
+  //End For image    
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+     margin: 0em 0 !important; 
+}
+  .mat-form-field-infix {
+    padding: 0;
+}

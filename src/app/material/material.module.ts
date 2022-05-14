@@ -35,6 +35,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ToastrModule } from 'ngx-toastr';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin

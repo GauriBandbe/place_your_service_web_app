@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
     const tokenH = "";
     console.log(tokenH);
     if(tokenH != ""){
-
+      console.log("Hard codes");
       console.log(form.value.email);
       const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJhbmRiZS5nYXVyaTAxQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImJhbmRiZS5nYXVyaTAxQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6IlZlbmRvciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3N1cm5hbWUiOiJCYW5kYmUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJWZW5kb3IiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9tb2JpbGVwaG9uZSI6IjkxNTgxNTkyODciLCJSb2xlQ29kZSI6IjIiLCJleHAiOjE2ODMwMjIyNjQsImlzcyI6Imh0dHA6Ly9wbGFjZXlvdXJzZXJ2aWNld2ViYXBpLWRldi5hcC1zb3V0aC0xLmVsYXN0aWNiZWFuc3RhbGsuY29tLyIsImF1ZCI6Imh0dHA6Ly9wbGFjZXlvdXJzZXJ2aWNld2ViYXBpLWRldi5hcC1zb3V0aC0xLmVsYXN0aWNiZWFuc3RhbGsuY29tLyJ9.mnZG81hkGouWaFkHoJGcqbkP7cYB4moGsnSD9qMuyFQ";
       const role = (<any>token).role;
@@ -95,16 +95,17 @@ export class LoginComponent implements OnInit {
         text: "Login Sucessfully!!!",
         icon: 'success'
       })
-      if(decrypt.RoleCode=="2"){
-          this.router.navigate(['/Admin/Dashboard']);
-      }
-      else{
-        Swal.fire({
-          text: "You are not authorized to access this application!",
-          icon: 'warning'
-        })
-        this.router.navigate(['/Login']);
-      }
+      // if(decrypt.RoleCode=="2"){
+      //     this.router.navigate(['/Admin/Dashboard']);
+      // }
+      // else{
+      //   Swal.fire({
+      //     text: "You are not authorized to access this application!",
+      //     icon: 'warning'
+      //   })
+      //   this.router.navigate(['/Login']);
+      // }
+      this.router.navigate(['/Admin/Dashboard']);
     }
     else{
 
@@ -120,6 +121,7 @@ export class LoginComponent implements OnInit {
           //   const role = (<any>response).role;
            //stored in local as session 
              localStorage.setItem("jwt", token);
+             
           //   this.invalidLogin = false;
           //   this.loginstarts=false;
           const headers= new Headers();
@@ -136,16 +138,18 @@ export class LoginComponent implements OnInit {
             this.http.get<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/User/CurrentUser',{ headers: reqHeader } )
             .subscribe(response => {
               console.log(response);
-                if(response.userTypeCode=="2"){
-                  this.router.navigate(['/Admin/Dashboard']);
-              }
-              else{
-                Swal.fire({
-                  text: "You are not authorized to access this application!",
-                  icon: 'warning'
-                })
-                this.router.navigate(['/Login']);
-              }
+              //   if(response.userTypeCode=="2"){
+              //     localStorage.setItem("userCode", response.userCode);
+              //     
+              // }
+              // else{
+              //   Swal.fire({
+              //     text: "You are not authorized to access this application!",
+              //     icon: 'warning'
+              //   })
+              //   this.router.navigate(['/Login']);
+              // }
+              this.router.navigate(['/Admin/Dashboard']);
             })
            
           

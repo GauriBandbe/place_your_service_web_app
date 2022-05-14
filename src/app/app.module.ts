@@ -39,7 +39,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Login/Login", "placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/User/AddTechnician" , "localhost:5002"],
+        allowedDomains: ["placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Login/Login", "placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/User/AddTechnician" , "http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/MasterData/"],
         disallowedRoutes: []
       }
     }),

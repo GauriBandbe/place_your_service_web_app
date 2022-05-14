@@ -1,5 +1,5 @@
 
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -60,9 +60,18 @@ export class TechnicianListComponent implements OnInit {
   {
     console.log("getTechnicianUsers");
    let queryParams = new HttpParams().append( "hasFilters", false)
-   
+   const token = localStorage.getItem("jwt") as string;
+		 
+   var reqHeader = new HttpHeaders({ 
+   'Content-Type': 'application/json',
+   'Authorization': 'Bearer '+ token
+ });
 
-    this.http.post<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Technician/GetTechnician' ,({"hasFilters" :true,"usePaging":true,"pageSize":10,"currentIndex":1,"userCodeList":[0],"vendorCodeList":[2]}))
+    var userCode = Number(localStorage.getItem("userCode"));
+    console.log(userCode);
+    this.http.post<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Technician/GetTechnician' 
+    ,({"hasFilters" :true,"usePaging":true,"pageSize":10,"currentIndex":1,"userCodeList":[0],"vendorCodeList":[2]})
+    ,{ headers: reqHeader })
     .subscribe(data => {
     //  })
 
