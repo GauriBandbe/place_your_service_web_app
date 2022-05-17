@@ -1,12 +1,10 @@
 .add-patient-btn
 {
-    display: flex;
+    
     align-items: center;
-    justify-content: flex-end;
-    padding-top: 2%;
-    padding-right: 10px;
+    padding-left: 62%;
     button{
-        background-color: #ff4081;
+        background-color: #ED8F2D;
         color: white;
         width: 150px;
         height: 40px;
@@ -41,4 +39,21 @@
                 width: 100%;
             }
         }
+}
+
+.title-section
+{
+    margin-top: 2%;
+    display: flex;
+    h6{
+        font-family: Roboto,Helvetica Neue, sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 02%;
+    }
+}
+
+.example-small-box
+{
+    margin-top: 25px;
 }

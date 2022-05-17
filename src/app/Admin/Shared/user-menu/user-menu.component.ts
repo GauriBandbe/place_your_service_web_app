@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { SettingsComponent } from '../settings/settings.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { GlobalConstants } from 'src/app/GlobalConstants';
 @Component({
   selector: 'app-user-menu',
   templateUrl: './user-menu.component.html',
@@ -54,7 +55,7 @@ export class UserMenuComponent implements OnInit {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer '+ token
 		 });
-		  this.http.get<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/User/CurrentUser',{ headers: reqHeader } )
+		  this.http.get<any>(GlobalConstants.apiURL+'/User/CurrentUser',{ headers: reqHeader } )
 		  .subscribe(response => {
 			console.log(response);			  
 			this.ProfileRole=response.userTypeDescription;

@@ -8,6 +8,7 @@ import { NotificationService } from 'src/app/Services/notification.service';
 //Sweet Alerts
 import Swal from 'sweetalert2';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { GlobalConstants } from 'src/app/GlobalConstants';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -80,41 +81,10 @@ export class LoginComponent implements OnInit {
   {
     this.loginstarts=true;
     const form = this.userForm;
-    const tokenH = "";
-    console.log(tokenH);
-    if(tokenH != ""){
-      console.log("Hard codes");
-      console.log(form.value.email);
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImJhbmRiZS5nYXVyaTAxQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImJhbmRiZS5nYXVyaTAxQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6IlZlbmRvciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3N1cm5hbWUiOiJCYW5kYmUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJWZW5kb3IiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9tb2JpbGVwaG9uZSI6IjkxNTgxNTkyODciLCJSb2xlQ29kZSI6IjIiLCJleHAiOjE2ODMwMjIyNjQsImlzcyI6Imh0dHA6Ly9wbGFjZXlvdXJzZXJ2aWNld2ViYXBpLWRldi5hcC1zb3V0aC0xLmVsYXN0aWNiZWFuc3RhbGsuY29tLyIsImF1ZCI6Imh0dHA6Ly9wbGFjZXlvdXJzZXJ2aWNld2ViYXBpLWRldi5hcC1zb3V0aC0xLmVsYXN0aWNiZWFuc3RhbGsuY29tLyJ9.mnZG81hkGouWaFkHoJGcqbkP7cYB4moGsnSD9qMuyFQ";
-      const role = (<any>token).role;
-      localStorage.setItem("jwt", token);
-      const token1 = localStorage.getItem("jwt") as string;
-      const decrypt = this.jwthelper.decodeToken(token1) ;
-      console.log(decrypt);
-      Swal.fire({
-        text: "Login Sucessfully!!!",
-        icon: 'success'
-      })
-      // if(decrypt.RoleCode=="2"){
-      //     this.router.navigate(['/Admin/Dashboard']);
-      // }
-      // else{
-      //   Swal.fire({
-      //     text: "You are not authorized to access this application!",
-      //     icon: 'warning'
-      //   })
-      //   this.router.navigate(['/Login']);
-      // }
-      this.router.navigate(['/Admin/Dashboard']);
-    }
-    else{
-
-      
-      this.http.post<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Login/Login' ,({"userName" :form.value.email,"password":form.value.password}))
+   
+    this.http.post<any>(GlobalConstants.apiURL+'/Login/Login' ,({"userName" :form.value.email,"password":form.value.password}))
           .subscribe(response => {
             //get response after login sucessfully
-            console.log("Else Blk");
-            console.log(response);
             const token = response;
             //const token = (<any>response).token;
             
@@ -135,21 +105,25 @@ export class LoginComponent implements OnInit {
               text: "Login Sucessfully!!!",
               icon: 'success'
             })
-            this.http.get<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/User/CurrentUser',{ headers: reqHeader } )
+           
+            this.http.get<any>(GlobalConstants.apiURL+'/User/CurrentUser',{ headers: reqHeader } )
             .subscribe(response => {
               console.log(response);
-              //   if(response.userTypeCode=="2"){
-              //     localStorage.setItem("userCode", response.userCode);
-              //     
-              // }
-              // else{
-              //   Swal.fire({
-              //     text: "You are not authorized to access this application!",
-              //     icon: 'warning'
-              //   })
-              //   this.router.navigate(['/Login']);
-              // }
-              this.router.navigate(['/Admin/Dashboard']);
+                if(response.userTypeCode=="0" ||  response.userTypeCode=="1" || response.userTypeCode=="2"){
+                  localStorage.setItem("userCode", response.userCode);
+                  localStorage.setItem("userTypeCode", response.userTypeCode);
+                  this.router.navigate(['/Admin/Dashboard']);
+                  this.loginstarts=false;
+              }
+              else{
+                Swal.fire({
+                  text: "You are not authorized to access this application!",
+                  icon: 'warning'
+                })
+                this.router.navigate(['/Login']);
+                this.loginstarts=false;
+              }
+              
             })
            
           
@@ -164,8 +138,7 @@ export class LoginComponent implements OnInit {
           },
           5000);
 
-          })
-    }
+        })
   
    
   }
@@ -216,13 +189,8 @@ export class LoginComponent implements OnInit {
       text: "Invalid user name or password",
       icon: 'error'
     })
-      //this.notificationservice.showError("Invalid user name or password", "Invalid Login")
+    this.loginstarts=false;
   }
 
-  //show and hide passwords
-  togglepassword(){
-    
-  }
- 
 
 }

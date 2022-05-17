@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/Services/notification.service';
 import { AuthGuard } from './../Services/guards.service';
 //Sweet Alerts
 import Swal from 'sweetalert2';
+import { GlobalConstants } from 'src/app/GlobalConstants';
 
 @Component({
   selector: 'app-forgot-password',
@@ -69,7 +70,7 @@ public Send_OTP() {
   this.isVisible=1;
   this.loginstarts=true;
   const form = this.userForm;
-  this.http.post<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Login/ForgetPassword' ,({"userName" :form.value.email,"passwordOTP":""}))
+  this.http.post<any>(GlobalConstants.apiURL+'/Login/ForgetPassword' ,({"userName" :form.value.email,"passwordOTP":""}))
   .subscribe(response => {
     //get response after login sucessfully
     console.log("Get Otp");
@@ -101,7 +102,7 @@ public Forgot_Password() : void{
   this.loginstarts=true;
   const form = this.userForm;
   console.log(form.value);
-  this.http.post<any>('http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Login/GetPassword' ,({"userName" :form.value.email,"passwordOTP":form.value.otp}))
+  this.http.post<any>(GlobalConstants.apiURL+'/Login/GetPassword' ,({"userName" :form.value.email,"passwordOTP":form.value.otp}))
   .subscribe(response => {
     //get response after login sucessfully
     console.log("Get pwd");

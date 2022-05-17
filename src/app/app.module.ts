@@ -19,6 +19,7 @@ import { DatePipe } from '@angular/common';
 import { NotificationService } from './Services/notification.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { GlobalConstants } from './GlobalConstants';
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
@@ -39,7 +40,9 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Login/Login", "placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/User/AddTechnician" , "http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/MasterData/"],
+        allowedDomains: ["http://localhost:4200/",GlobalConstants.apiURL+"/Login/Login", 
+        GlobalConstants.apiURL+"/User/AddTechnician" , GlobalConstants.apiURL+"/MasterData/", 
+        GlobalConstants.apiURL+"/Vendor/AddVendor"],
         disallowedRoutes: []
       }
     }),

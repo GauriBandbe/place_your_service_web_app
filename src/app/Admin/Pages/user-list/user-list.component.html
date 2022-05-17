@@ -1,37 +1,10 @@
- 
-
-
- <div class="animated fadeIn" >
-  <div class="row">
-    
-    <div class="col-md-12 mb-4">
-      <!-- Nav tabs -->
-      <mat-card  class ="table-contents" style="margin-right: 11px;">
-    
-      <mat-tab-group dynamicHeight animationDuration="0ms" style="border: 1px solid black; ">
-        <mat-tab label="Hospital Users">
-          
-          <app-hospital-users></app-hospital-users>
-
-         
-        </mat-tab>
-        
-        <mat-tab label="Patient Users">
-
-          <app-patient-users></app-patient-users>
-
-         
-        </mat-tab>
-       
-
-       
-        
-      </mat-tab-group>
-    </mat-card>
-    </div><!--/.col-->
-   
-  </div><!--/.row-->
+<div class="form-group">
+  <label for="picture">Picture</label>
+  <div class="custom-file">
+    <input #file type="file" id="customFile" accept=".jpg,.png,.gif" multiple (change)="upload(file.files)" />
+    <label class="custom-file-label" for="customFile">Choose file</label>
+  </div>
 </div>
-
-
-
+<div class="progress">
+  <div class="progress-bar" role="progressbar" [style.width.%]="progress"></div>
+</div>

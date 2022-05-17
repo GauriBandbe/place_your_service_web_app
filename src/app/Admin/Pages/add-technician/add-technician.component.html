@@ -11,6 +11,8 @@
         </div>  
         
       </mat-card-title>   
+
+      
     <div class="card m-3 mat-elevation-z8">
          <div class="card-body">
             <div class="row">
@@ -30,13 +32,9 @@
                           </label>
                           <label>Upload Photo Here</label>
                           <br/>
-                          <input id="fileInput" type='file' (change)="onSelectFile($event)">
+                          <input id="fileInput" type='file' (change)="onUploadProfileFile($event)">
                           <!-- <button *ngIf="url" (click)="delete()" >delete</button> -->
-                         <div class="container text-center jumbotron"
-                            *ngIf="shortLink">
-                            <h2> Visit Here</h2>
-                            <a href="{{shortLink}}">{{shortLink}}</a>
-                        </div>
+                         
                        </div> 
                       
                        
@@ -130,7 +128,10 @@
                             </div>
                             <div class="form-group col">
                                 <label>Blood Group</label>
-                                <input type="text" formControlName="bloodGroup_Code" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['bloodGroup_Code']?.errors }">
+                                <select formControlName="bloodGroup_Code" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['bloodGroup_Code']?.errors }">
+                                    <option [value]="option.value" *ngFor="let option of bloodgroup">{{ option.viewValue }}</option>
+                                    
+                                </select>
                                 <div *ngIf="submitted && registerForm.controls['bloodGroup_Code']?.errors" class="invalid-feedback">
                                     <div *ngIf="registerForm.controls['bloodGroup_Code']?.errors?.['required']">blood Group Type is required</div>
                                 
@@ -212,7 +213,7 @@
                                           (+{{technicalQualification.value.length - 1}} {{technicalQualification.value?.length === 2 ? 'other' : 'others'}})
                                         </span>
                                       </mat-select-trigger>
-                                      <mat-option *ngFor="let topping of toppingList" [value]="topping.name">{{topping.name}}</mat-option>
+                                      <mat-option *ngFor="let technicalQ of technicalQualifictnList" [value]="technicalQ.name">{{technicalQ.name}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                 
@@ -240,7 +241,7 @@
                                           (+{{typeofWork.value.length - 1}} {{typeofWork.value?.length === 2 ? 'other' : 'others'}})
                                         </span>
                                       </mat-select-trigger>
-                                      <mat-option *ngFor="let typeofWorks of toppingList" [value]="typeofWorks.name" (onSelectionChange)="getvalue(typeofWorks.id)">{{typeofWorks.name}}</mat-option>
+                                      <mat-option *ngFor="let typeofWorks of typeofWorkList" [value]="typeofWorks.name" (onSelectionChange)="gettypeofWorkvalue(typeofWorks.id)">{{typeofWorks.name}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                 <!-- <div *ngIf="submitted && registerForm.controls['typeofWork']?.errors" class="invalid-feedback">
@@ -262,7 +263,7 @@
                                 <div class="background"></div>
                               </label>
                               <br/>
-                              <input id="fileInput2" type='file' (change)="onSelectFile2($event)">
+                              <input id="fileInput2" type='file' (change)="onUploadAdharFrontFile($event)">
                               <!-- <button *ngIf="url" (click)="delete()" >delete</button> -->
                            </div> 
                            <div style="margin-left: 5%;">
@@ -278,7 +279,7 @@
                                 <div class="background"></div>
                               </label>
                               <br/>
-                              <input id="fileInput3" type='file' (change)="onSelectFile3($event)">
+                              <input id="fileInput3" type='file' (change)="onUploadAdharBackFile($event)">
                         </div> 
                            
                        </div>
@@ -300,7 +301,7 @@
                         </div>
                         
                     </form>
-                 </div>
+                </div>
             </div>
              
              

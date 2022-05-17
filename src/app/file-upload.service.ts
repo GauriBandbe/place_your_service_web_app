@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 export class FileUploadService {
     
   // API url
-  baseApiUrl = "../../../assets/images/Technician/"
+  baseApiUrl = "http://127.0.0.1:4200//src/assets/images/Technician"
     
   constructor(private http:HttpClient) { }
   

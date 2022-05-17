@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { menus } from './menu-element';
+import { UserDetailsComponent } from '../../Pages/user-details/user-details.component';
+ import { menus, Vendormenus } from './menu-element';
 
 @Component({
   selector: 'app-sidemenu',
@@ -9,11 +10,22 @@ import { menus } from './menu-element';
 export class SidemenuComponent implements OnInit {
 
   @Input() iconOnly:boolean = false;
-    public menus = menus;
 
+    public menus = menus;
+    public Vmenus = Vendormenus;
+    public usert = Number(localStorage.getItem("userTypeCode"));
+   
+    
+    // if(localStorage.getItem("userCode") == "2")
+    // {
+    //    menus = menus;
+    // }
+    // else{
+    
+    // }
     constructor() { }
 
     ngOnInit() {
     }
-
+    
 }

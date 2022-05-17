@@ -1,10 +1,8 @@
-import { HttpParams } from '@angular/common/http';
-import { AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import { AdminService } from '../../Services/admin.service';
+
+import { HttpEventType, HttpRequest } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FileUploadService } from 'src/app/file-upload.service';
+import { GlobalConstants } from 'src/app/GlobalConstants';
 
 
 export interface UserData {
@@ -18,31 +16,34 @@ export interface UserData {
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss',
 ], 
-encapsulation: ViewEncapsulation.None
 })
-export class UserListComponent implements AfterViewInit  {
+export class UserListComponent  {
+  baseUrl: string;
+  http: any;
+  progress: number;
   
-
- public mode:string = "1";
-
- 
- ngOnInit(): void {
+  upload(files : any) {
+    if (files.length === 0)
+      return;
   
+    const formData = new FormData();
   
- }
-
- constructor() 
- {
-   
- }
-
- ngAfterViewInit() {
-   
- }
+    for (const file of files) {
+      formData.append(file.name, file);
+    }
+  
+    console.log(formData);
+    const uploadReq = new HttpRequest('POST', GlobalConstants.apiURL + 'FileManagement/upload', formData, {
+      reportProgress: true,
+    });
+  
+    this.http.request(uploadReq).subscribe((event: { type: HttpEventType; loaded: number; total: number; }) => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.progress = Math.round(100 * event.loaded / event.total);
+      };
+    });
+  }
 }
-
- 
-
 
  
 

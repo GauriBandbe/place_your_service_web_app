@@ -11,28 +11,27 @@ let TechUserData =[];
 import Swal from 'sweetalert2';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { GlobalConstants } from 'src/app/GlobalConstants';
+import { FasDirective } from 'angular-bootstrap-md';
 export interface UserData {
-  userCode: string;
-  profile: string;
-  technicianName: string;
-  mobile_1: string;
-  uidaI_Aadhar: string;
-  adharStatus: string;
+  vendorName: string;
+  vendorGST: string;
+  vendorMobile: string;
+  vendorEmail: string;
   
 }
 @Component({
-  selector: 'app-technician-list',
-  templateUrl: './technician-list.component.html',
-  styleUrls: ['./technician-list.component.scss']
+  selector: 'app-vendor-list',
+  templateUrl: './vendor-list.component.html',
+  styleUrls: ['./vendor-list.component.scss']
 })
-export class TechnicianListComponent implements OnInit {
+export class VendorListComponent implements OnInit {
 
   Email : any="";
   public mode:string = "1";
 
   alltechdatas: any;
   UserForm : FormGroup | undefined;
-  displayedColumns: string[] = ['userCode', 'Profile', 'Name', 'Mobile No','Adhar No','Adhar status','Action'];
+  displayedColumns: string[] = ['vendorCode','vendorName', 'vendorGST', 'vendorMobile', 'vendorEmail'];
   dataSource: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -52,14 +51,14 @@ export class TechnicianListComponent implements OnInit {
    }
    
    ngOnInit(): void {
-     this.getTechnicianUsers();
+     this.getVendorUsers();
      
     }
  
  //get all patient users list
-  getTechnicianUsers()
+  getVendorUsers()
   {
-    console.log("getTechnicianUsers");
+    console.log("getVendorUsers");
    let queryParams = new HttpParams().append( "hasFilters", false)
    const token = localStorage.getItem("jwt") as string;
 		 
@@ -70,41 +69,24 @@ export class TechnicianListComponent implements OnInit {
 
     var userCode = Number(localStorage.getItem("userCode"));
     console.log(userCode);
-    this.http.post<any>(GlobalConstants.apiURL+'/Technician/GetTechnician' 
-    ,({"hasFilters" :true,"usePaging":true,"pageSize":10,"currentIndex":1,"userCodeList":[0],"vendorCodeList":[2]})
+    this.http.post<any>(GlobalConstants.apiURL+'/Vendor/GetVendor' 
+    ,({"hasFilters" :false,"usePaging":true,"pageSize":10,"currentIndex":1,"vendorCodeList":[0],"vendorGSTList":[""]})
     ,{ headers: reqHeader })
     .subscribe(data => {
-    //  })
-
-
-    //  this.act.GetAllTechUsers(queryParams).subscribe(data => 
-    //  {
       console.log(data);
         const datas = (<any>data);
-       // datas.profile="'./assets/images/Beared Guy02-min 2.png'";
-         this.alltechdatas = datas;
-         TechUserData=this.alltechdatas;
-         console.log(TechUserData);
-         TechUserData.forEach((element: { isAdminApproved: any; }) => {
-           if(element.isAdminApproved== 1)
-           {
-             element.isAdminApproved = "Approved";
-           }else if(element.isAdminApproved== 0)
-           {
-             element.isAdminApproved = "Rejected";
-           }
-           else{
-             element.isAdminApproved = "pending";
-           }
-       });
-         // Assign the data to the data source for the table to render
-         this.dataSource = new MatTableDataSource(TechUserData);
-         this.dataSource.paginator = this.paginator;
-         this.dataSource.sort = this.sort;
- 
+        this.alltechdatas = datas;
+        TechUserData=this.alltechdatas;
+        console.log(TechUserData);
+        
+        // Assign the data to the data source for the table to render
+        this.dataSource = new MatTableDataSource(TechUserData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }, err => {
       console.log(err)
       });
   }
  
 }
+

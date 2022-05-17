@@ -204,6 +204,14 @@ button, input, optgroup, select, textarea {
     // margin-right: -15px;
     // margin-left: -15px;
 }
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
 .col-9 {
     flex: 0 0 75%;
     max-width: 75%;
@@ -236,8 +244,9 @@ button, input, optgroup, select, textarea {
     position: relative;
     display: block;
     cursor: pointer;
-    height: 200px;
-    width: 200px;
+
+     height: 200px;
+     width: 200px;
     border: 1px solid #C4C4C4;
     border-radius: 3%;
   }

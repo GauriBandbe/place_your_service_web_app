@@ -58,12 +58,7 @@ export class AuthGuard   implements CanActivate  {
   public ResetPassword(pass : any):Observable<any>{
     return this.http.post("http://localhost:5000/api/auth/ResetPassword", pass )
   }
-  
-  //For Create TechnicianUser
-  public CreateTechnicianUser(TechnicianUserData : any):Observable<any>{
-    return this.http.post("http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/User/AddTechnician",TechnicianUserData)
-  }
-
+ 
  //For Create Patient User
   public PatientUserRegistration(pass : any):Observable<any>{
     return this.http.post("http://localhost:5000/api/Auth/PatientUserRegistartion" , pass)

@@ -10,6 +10,15 @@
     <div style="height: 20px;margin-bottom: 2%" fxLayoutAlign="space-around center"  >
       <h4 style="color: white;">Admin</h4>
     </div> -->
-    <app-sidemenu-item  *ngFor="let menu of menus" [menu]="menu" [iconOnly]="iconOnly"
+    <div *ngIf="usert != 2;">
+    <app-sidemenu-item  *ngFor="let menu of menus" 
+    [menu]="menu" [iconOnly]="iconOnly"
     > </app-sidemenu-item>
+   </div> 
+   <div *ngIf="usert == 2;">
+    <app-sidemenu-item  *ngFor="let Vendormenus of Vmenus" 
+    [menu]="Vendormenus" [iconOnly]="iconOnly"
+    > </app-sidemenu-item>
+   </div>
+
 </div>

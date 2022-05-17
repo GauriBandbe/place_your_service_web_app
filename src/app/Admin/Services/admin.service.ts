@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { GlobalConstants } from 'src/app/GlobalConstants';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AdminService {
   public GetAllTechUsers(queryParams : any):Observable<any>
   {
     console.log("queryParams:"+ queryParams)
-    const url = 'http://placeyourservicewebapi-dev.ap-south-1.elasticbeanstalk.com/api/Technician/GetTechnician';
+    const url = GlobalConstants.apiURL+'/Technician/GetTechnician';
     return this.http.get(url, 
       {
         headers: new HttpHeaders({
