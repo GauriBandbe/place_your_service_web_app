@@ -205,22 +205,20 @@
                             <div class="form-group col">
                                 <label>Technical Qualification</label>
                                 <mat-form-field appearance="outline" style="width: 100%;background-color: white;font-size: 10.5px;padding-top: 0%;" >
-                                    
-                                    <mat-select [formControl]="technicalQualification"  multiple>
+                            
+                                    <mat-select [formControl]="typeofTechQualifications"  multiple [(value)]="selectedTechQualification" >
                                       <mat-select-trigger>
-                                        {{technicalQualification.value ? technicalQualification.value[0] : ''}}
-                                        <span *ngIf="technicalQualification.value?.length > 1" class="example-additional-selection">
-                                          (+{{technicalQualification.value.length - 1}} {{technicalQualification.value?.length === 2 ? 'other' : 'others'}})
+                                        {{typeofTechQualifications.value ? typeofTechQualifications.value[0] : ''}}
+                                        <span *ngIf="typeofTechQualifications.value?.length > 1" class="example-additional-selection">
+                                          (+{{typeofTechQualifications.value.length - 1}} {{typeofTechQualifications.value?.length === 2 ? 'other' : 'others'}})
                                         </span>
                                       </mat-select-trigger>
-                                      <mat-option *ngFor="let technicalQ of technicalQualifictnList" [value]="technicalQ.name">{{technicalQ.name}}</mat-option>
+                                      <mat-option *ngFor="let typeOfTechQualifications of typeofTechQualificationList" [value]="typeOfTechQualifications.viewValue" >{{typeOfTechQualifications.viewValue}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
-                                
-<!--                                 
-                                <div *ngIf="submitted && registerForm.controls['technicalQualification']?.errors" class="invalid-feedback">
-                                    <div *ngIf="registerForm.controls['technicalQualification']?.errors?.['required']">Technical Qualification is required</div>
-                                </div> -->
+                                <div *ngIf="submitted && registerForm.controls['typeOfTechQualification']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['typeOfTechQualification']?.errors?.['required']">Technician Qualification is required</div>
+                                </div>
                             </div> 
                             <div class="form-group col">
                                 <label>Work Experience</label>
@@ -233,20 +231,20 @@
                             <div class="form-group col">
                                 <label>Type of Work(s)</label>
                                 <mat-form-field appearance="outline" style="width: 100%;background-color: white;font-size: 10.5px;padding-top: 0%;" >
-                                    
-                                    <mat-select [formControl]="typeofWork" multiple [(value)]="selectedFood" >
+                            
+                                    <mat-select [formControl]="typeofWorks"  multiple [(value)]="selectedWork" >
                                       <mat-select-trigger>
-                                        {{typeofWork.value ? typeofWork.value[0] : ''}}
-                                        <span *ngIf="typeofWork.value?.length > 1" class="example-additional-selection">
-                                          (+{{typeofWork.value.length - 1}} {{typeofWork.value?.length === 2 ? 'other' : 'others'}})
+                                        {{typeofWorks.value ? typeofWorks.value[0] : ''}}
+                                        <span *ngIf="typeofWorks.value?.length > 1" class="example-additional-selection">
+                                          (+{{typeofWorks.value.length - 1}} {{typeofWorks.value?.length === 2 ? 'other' : 'others'}})
                                         </span>
                                       </mat-select-trigger>
-                                      <mat-option *ngFor="let typeofWorks of typeofWorkList" [value]="typeofWorks.name" (onSelectionChange)="gettypeofWorkvalue(typeofWorks.id)">{{typeofWorks.name}}</mat-option>
+                                      <mat-option *ngFor="let typeOfWorks of typeofWorkList" [value]="typeOfWorks.viewValue" >{{typeOfWorks.viewValue}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
-                                <!-- <div *ngIf="submitted && registerForm.controls['typeofWork']?.errors" class="invalid-feedback">
-                                    <div *ngIf="registerForm.controls['typeofWork']?.errors?.['required']">Type of Work is required</div>
-                                </div> -->
+                                <div *ngIf="submitted && registerForm.controls['typeOfWork']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['typeOfWork']?.errors?.['required']">Type of Work is required</div>
+                                </div>
                             </div> 
                         </div>
                         <div class="form-row">

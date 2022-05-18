@@ -10,8 +10,8 @@ import { FileUploadService } from 'src/app/file-upload.service';
 import { GlobalConstants } from 'src/app/GlobalConstants';
 
 interface TypeofWork {
-  id: number;
-  name: string;
+  value: number;
+  viewValue: string;
 }
 interface Vendor {
   value: string;
@@ -20,6 +20,9 @@ interface Vendor {
 interface Bloodgroup{
   value: string;
   viewValue: string;
+}
+interface Tservise {
+  //id: number;
 }
 @Component({
   selector: 'app-add-technician',
@@ -46,6 +49,8 @@ export class AddTechnicianComponent  implements OnInit {
     ngOnInit() {
         this.getVendorList();
         this.getBloodgroupList();
+        this.gettypeofWorkList();
+        this.gettypeofTechQualificationList();
         this.registerForm = this.formBuilder.group({
             gender: ['', Validators.required],
             titleCode: [''],
@@ -229,28 +234,54 @@ export class AddTechnicianComponent  implements OnInit {
     }
    
 
-    //For Technician Dropdown
-    typeofWork = new FormControl();
-    technicalQualification= new FormControl();
-   
-    typeofWorkList :TypeofWork[] = [
-      { id: 1, name: "ITI Turner" },
-      { id: 2, name: "ITI Fiter" },
-      { id: 3, name: "ITI Electrical" },
-      { id: 4, name: "ITI Computer" },
-      { id: 5, name: "ITI Mechanical" },
-    ];
-    selectedFood = this.typeofWorkList[0].name;
+  
 
-    technicalQualifictnList :TypeofWork[] = [
-      { id: 1, name: "ITI Turner" },
-      { id: 2, name: "ITI Fiter" },
-      { id: 3, name: "ITI Electrical" },
-      { id: 4, name: "ITI Computer" },
-      { id: 5, name: "ITI Mechanical" },
-    ];
-    //For Technician Dropdown
+//For Type of Work
+typeofWorkList :TypeofWork[]= [];
+typeofWorkList2 :TypeofWork[] = [];
 
+typeofWorks = new FormControl();
+selectedWork : any;
+gettypeofWorkList(){
+ const token = localStorage.getItem("jwt") as string;
+    
+         var reqHeader = new HttpHeaders({ 
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer '+ token
+       });
+
+ this.http.get<any>(GlobalConstants.apiURL+'/MasterData/GetWorkType',{ headers: reqHeader } )
+ .subscribe(response => {  
+   for(var i=0; i<response.length;i++){
+     var Tservise={ value :response[i].key ,viewValue : response[i].description } ;      
+     this.typeofWorkList.push(Tservise)
+   }
+ })
+  
+}
+ //For Qualification Dropdown
+typeofTechQualificationList :TypeofWork[]= [];
+typeofTechQualificationList2 :TypeofWork[] = [];
+
+typeofTechQualifications = new FormControl();
+selectedTechQualification : any;
+gettypeofTechQualificationList(){
+const token = localStorage.getItem("jwt") as string;
+
+     var reqHeader = new HttpHeaders({ 
+     'Content-Type': 'application/json',
+     'Authorization': 'Bearer '+ token
+   });
+
+this.http.get<any>(GlobalConstants.apiURL+'/MasterData/GetQualification',{ headers: reqHeader } )
+.subscribe(response => {  
+for(var i=0; i<response.length;i++){
+ var Tservise={ value :response[i].key ,viewValue : response[i].description } ;      
+ this.typeofTechQualificationList.push(Tservise)
+}
+})
+
+}
 
     //For get Type of work Dropdown
     gettypeofWorkvalue(event: any) {
@@ -306,7 +337,13 @@ getBloodgroupList(){
 }
 
 //For Add Technician
+typeofWorkListM : Tservise[] = [];
+typeofTechQualificationListM : Tservise[] = [];
 onSubmit() {
+  this.typeofWorkListM=[];
+  this.typeofWorkList2=[];
+  this.typeofTechQualificationListM=[];
+  this.typeofTechQualificationList2=[];
 
   this.submitted = true;
   var user = this.registerForm.value
@@ -314,12 +351,76 @@ onSubmit() {
   console.log(this.registerForm.value);   
   this.registerForm.value.vendorCode =2;
   this.registerForm.value.titleCode = 1;
+  this.registerForm.value.bloodGroup_Code = Number(this.registerForm.value.bloodGroup_Code);
   // stop here if form is invalid
   //
   
   if (this.registerForm.invalid) {
       return;
   }
+ //For TechQualification
+ if(this.typeofTechQualifications.value != null){
+  for(var i=0; i<this.typeofTechQualifications.value.length;i++){
+    var Tservise2={ value : 0 ,viewValue : this.typeofTechQualifications.value[i] } ;      
+    this.typeofTechQualificationList2.push(Tservise2)
+  }
+  
+ }else{
+  Swal.fire({
+    text: "Please select type of Technical Qualification.",
+    icon: 'error'
+  });
+  return;
+ }
+
+ 
+ if(this.typeofTechQualificationList2.length >0){
+  for(var i=0; i<this.typeofTechQualificationList2.length;i++){
+    let index  = this.typeofTechQualificationList.findIndex(item => item.viewValue == this.typeofTechQualificationList2[i].viewValue);
+    if(index>0){
+      this.typeofTechQualificationListM.push(this.typeofTechQualificationList[index].value) 
+    }   
+  }
+ }else{
+  Swal.fire({
+    text: "Please select type of Technical Qualification.",
+    icon: 'error'
+  });
+  return;
+ }
+   //For Work
+ if(this.typeofWorks.value != null){
+  for(var i=0; i<this.typeofWorks.value.length;i++){
+    var Tservise2={ value : 0 ,viewValue : this.typeofWorks.value[i] } ;      
+    this.typeofWorkList2.push(Tservise2)
+  }
+  
+ }else{
+  Swal.fire({
+    text: "Please select type of Works.",
+    icon: 'error'
+  });
+  return;
+ }
+
+ 
+ if(this.typeofWorkList2.length >0){
+  for(var i=0; i<this.typeofWorkList2.length;i++){
+    let index  = this.typeofWorkList.findIndex(item => item.viewValue == this.typeofWorkList2[i].viewValue);
+    if(index>0){
+      this.typeofWorkListM.push(this.typeofWorkList[index].value)     
+    }   
+  }
+ }else{
+  Swal.fire({
+    text: "Please select type of Works.",
+    icon: 'error'
+  });
+  return;
+ }
+
+
+
   this.loginstarts=true;
   
   const token = localStorage.getItem("jwt") as string;
@@ -328,7 +429,7 @@ onSubmit() {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer '+ token
   });
-  console.log(token);
+  //console.log(token);
   // display form values on success
   this.http.post<any>(GlobalConstants.apiURL+'/User/AddTechnician' ,   
   ({
@@ -346,6 +447,8 @@ onSubmit() {
    "uidaI_Aadhar_Masked": "",
    "bloodGroup_Code": this.registerForm.value.bloodGroup_Code,
    "vendorCode": 2,
+   "workTypeCodeList": this.typeofWorkListM,
+   "qualificationCodeList": this.typeofTechQualificationListM,
    "postalAddress":  this.registerForm.value.Address + " " + this.registerForm.value.Address2 + " " + this.registerForm.value.landmark +" "
    + this.registerForm.value.zipCode +" "+ this.registerForm.value.city +" " + this.registerForm.value.district+ " " + this.registerForm.value.state+ " " + this.registerForm.value.country
    }),{ headers: reqHeader })

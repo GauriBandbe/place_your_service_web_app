@@ -11,6 +11,7 @@ let TechUserData =[];
 import Swal from 'sweetalert2';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { GlobalConstants } from 'src/app/GlobalConstants';
+import { Router } from '@angular/router';
 export interface UserData {
   userCode: string;
   profile: string;
@@ -20,13 +21,14 @@ export interface UserData {
   adharStatus: string;
   
 }
+
 @Component({
   selector: 'app-technician-list',
   templateUrl: './technician-list.component.html',
   styleUrls: ['./technician-list.component.scss']
 })
 export class TechnicianListComponent implements OnInit {
-
+  public adharStatusUrl="";
   Email : any="";
   public mode:string = "1";
 
@@ -40,7 +42,7 @@ export class TechnicianListComponent implements OnInit {
   sort: MatSort = new MatSort;
  
   
-   constructor( private act : AdminService,private http: HttpClient,) { }
+   constructor( private router: Router,private act : AdminService,private http: HttpClient,) { }
  
    applyFilter(event: Event) {
      const filterValue = (event.target as HTMLInputElement).value;
@@ -85,16 +87,20 @@ export class TechnicianListComponent implements OnInit {
          this.alltechdatas = datas;
          TechUserData=this.alltechdatas;
          console.log(TechUserData);
-         TechUserData.forEach((element: { isAdminApproved: any; }) => {
+          
+         TechUserData.forEach((element: { isAdminApproved: any;Isdisabled : any }) => {
            if(element.isAdminApproved== 1)
            {
-             element.isAdminApproved = "Approved";
+            element.isAdminApproved = '../../../assets/images/Approvestatus.png';
+            element.Isdisabled= true;
            }else if(element.isAdminApproved== 0)
            {
-             element.isAdminApproved = "Rejected";
+            element.isAdminApproved = '../../../assets/images/Rejectstatus.png';
+            element.Isdisabled= true;
            }
            else{
-             element.isAdminApproved = "pending";
+            element.isAdminApproved = '../../../assets/images/Pendingstatus.png';
+            element.Isdisabled= false;
            }
        });
          // Assign the data to the data source for the table to render
@@ -106,5 +112,155 @@ export class TechnicianListComponent implements OnInit {
       console.log(err)
       });
   }
- 
+ //Approve Adhar Status
+ApproveAdharStatus(userCode:any,Isdisabled : boolean)
+{
+  if(Isdisabled==true){
+    Swal.fire({
+      text: "Sorry!! You already changed the status.",
+      icon: 'warning'
+    });
+    return;
+  }
+  const userTypeCode = Number(localStorage.getItem("userTypeCode"));
+  if(userTypeCode== 0 || userTypeCode== 1){
+    const vendorCode = Number(localStorage.getItem("userCode"));
+    console.log(userCode);
+    console.log(vendorCode);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Yes, approve it!',
+      cancelButtonText: 'Yes, reject it!'
+    }).then((result) => 
+    {
+      console.log(result);
+      if (result.isConfirmed) 
+      {
+        if(userCode!=null)
+        {
+         //For Confirmation API
+         const token = localStorage.getItem("jwt") as string;
+  
+         var reqHeader = new HttpHeaders({ 
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer '+ token
+       });
+         this.http.post<any>(GlobalConstants.apiURL+'/Technician/ApproveTechnician' ,   
+         ({
+          "userCode": userCode,
+          "vendorCode": vendorCode,
+          "approveStatus": true
+          }),{ headers: reqHeader })
+         //this.act.CreateTechnicianUser(this.registerForm.value)
+         .subscribe((data)=> 
+         {
+           console.log(data);
+           if(data.isApproveSuccess==true){
+               Swal.fire({
+                   text: data.message,
+                   icon: 'success'
+                 });
+                 this.getTechnicianUsers();
+           }
+           else{
+               Swal.fire({
+                   text: data.validationStatuses.validationMessage,
+                   icon: 'error'
+                 });
+           }
+             
+       }
+       , (error) => {                              //Error callback
+         console.error('error caught in component')
+        console.log(error)
+        var errmsg="";
+        errmsg="<ul>"
+        for(var i=0;i< error.error.validationStatuses.length;i++ ){
+         errmsg+= "<li>" + error.error.validationStatuses[i].validationMessage +"</li>"
+        }      
+        errmsg+="</ul>"
+        Swal.fire({
+         title: '<strong>'+error.error.message+'</strong>',
+         icon: 'info',
+         html:errmsg,
+         showCloseButton: true,
+         showCancelButton: true,
+         focusConfirm: false      })
+         //throw error;   //You can also throw the error to a global error handler
+       })
+         //End
+        }
+        
+  
+      }      
+      else if (result.dismiss === Swal.DismissReason.cancel) 
+      {
+        if(userCode!=null)
+        {
+         //For Confirmation API
+         const token = localStorage.getItem("jwt") as string;
+  
+         var reqHeader = new HttpHeaders({ 
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer '+ token
+       });
+         this.http.post<any>(GlobalConstants.apiURL+'/Technician/ApproveTechnician' ,   
+         ({
+          "userCode": userCode,
+          "vendorCode": vendorCode,
+          "approveStatus": false
+          }),{ headers: reqHeader })
+         .subscribe((data)=> 
+         {
+           console.log(data);
+           if(data.isApproveSuccess==true){
+               Swal.fire({
+                   text: data.message,
+                   icon: 'success'
+                 });
+                 this.getTechnicianUsers();
+           }
+           else{
+               Swal.fire({
+                   text: data.validationStatuses.validationMessage,
+                   icon: 'error'
+                 });
+           }
+             
+       }
+       , (error) => {                              //Error callback
+         console.error('error caught in component')
+        console.log(error)
+        var errmsg="";
+        errmsg="<ul>"
+        for(var i=0;i< error.error.validationStatuses.length;i++ ){
+         errmsg+= "<li>" + error.error.validationStatuses[i].validationMessage +"</li>"
+        }      
+        errmsg+="</ul>"
+        Swal.fire({
+         title: '<strong>'+error.error.message+'</strong>',
+         icon: 'info',
+         html:errmsg,
+         showCloseButton: true,
+         showCancelButton: true,
+         focusConfirm: false      })
+         //throw error;   //You can also throw the error to a global error handler
+       })
+         //End
+        }
+      }
+    }) 
+  }
+  else{
+    Swal.fire({
+      text: "You are not authorized to change the adhar status.",
+      icon: 'warning'
+    });
+  }
+}
 }

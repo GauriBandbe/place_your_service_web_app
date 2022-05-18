@@ -42,7 +42,7 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         allowedDomains: ["http://localhost:4200/",GlobalConstants.apiURL+"/Login/Login", 
         GlobalConstants.apiURL+"/User/AddTechnician" , GlobalConstants.apiURL+"/MasterData/", 
-        GlobalConstants.apiURL+"/Vendor/AddVendor"],
+        GlobalConstants.apiURL+"/Vendor/AddVendor",GlobalConstants.apiURL+"/Technician/ApproveTechnician"],
         disallowedRoutes: []
       }
     }),
