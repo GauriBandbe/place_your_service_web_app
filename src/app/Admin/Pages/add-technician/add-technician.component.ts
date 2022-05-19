@@ -422,7 +422,7 @@ onSubmit() {
 
 
   this.loginstarts=true;
-  
+  const Vname= this.registerForm.value.firstName +" "+this.registerForm.value.lastName;
   const token = localStorage.getItem("jwt") as string;
 
     var reqHeader = new HttpHeaders({ 
@@ -462,21 +462,36 @@ onSubmit() {
             icon: 'success'
           });
           this.router.navigate(['/Admin/TechnicianList']);
-        // this.notifyService.showSuccess(data.message.message, "Success")
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 9000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: Vname +" "+data.message
+          })
+        
     }
     else{
         Swal.fire({
-            text: data.validationStatuses.validationMessage,
+            text: data.message,
             icon: 'error'
           });
-        // this.notifyService.showError(data.message.message, "Error")
     }
     this.loginstarts=false;
-    this.onReset();       
+    //this.onReset();       
 }
 , (error) => {     
   this.loginstarts=false;                         //Error callback
-  console.error('error caught in component')
+  console.error("error caught in component");
  console.log(error)
  var errmsg="";
  errmsg="<ul>"

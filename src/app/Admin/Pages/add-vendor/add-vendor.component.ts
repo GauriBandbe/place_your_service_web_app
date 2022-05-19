@@ -72,10 +72,10 @@ getVendorList(){
          'Authorization': 'Bearer '+ token
        });
 
- this.http.get<any>(GlobalConstants.apiURL+'/MasterData/GetVendorDDL',{ headers: reqHeader } )
+ this.http.get<any>(GlobalConstants.apiURL+'/MasterData/GetVendorType',{ headers: reqHeader } )
  .subscribe(response => {
    for(var i=0; i<response.length;i++){
-     var vdr={ value :response[i].key ,viewValue : response[i].value } ;      
+     var vdr={ value :response[i].key ,viewValue : response[i].description } ;      
      this.vendor.push(vdr)
    }
  })
@@ -165,7 +165,9 @@ onSubmit() {
    'Authorization': 'Bearer '+ token
  });
  const Vtype = Number(this.registerForm.value.vendorType);
+ const Vname= this.registerForm.value.vendorName;
  const vEmpStrength = Number(this.registerForm.value.vendorEmpStrength);
+ console.log(Vtype)
  // display form values on success
  this.http.post<any>(GlobalConstants.apiURL+'/Vendor/AddVendor' ,   
  ({
@@ -181,26 +183,43 @@ onSubmit() {
 }),{ headers: reqHeader })
  .subscribe((data)=> 
  {
-  // console.log(data);
+   console.log(data);
    if(data.isAddSuccess==true){
        Swal.fire({
            text: data.message,
            icon: 'success'
          });
          this.router.navigate(['/Admin/VendorList']);
+
+         const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 9000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: Vname +" "+data.message
+        })
    }
    else{
        Swal.fire({
-           text: data.validationStatuses.validationMessage,
+           text: data.message,
            icon: 'error'
          });
    }
    this.loginstarts=false;
-   this.onReset();       
+         
 }
 , (error) => {      
   this.loginstarts=false;        
- console.error('error caught in component')
+  console.error("error caught in component");
 console.log(error)
 var errmsg="";
 errmsg="<ul>"
