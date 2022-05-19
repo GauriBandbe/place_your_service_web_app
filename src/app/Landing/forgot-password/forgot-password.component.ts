@@ -73,8 +73,7 @@ public Send_OTP() {
   this.http.post<any>(GlobalConstants.apiURL+'/Login/ForgetPassword' ,({"userName" :form.value.email,"passwordOTP":""}))
   .subscribe(response => {
     //get response after login sucessfully
-    console.log("Get Otp");
-    console.log(response);
+   
     Swal.fire({
       text: "Otp sent to registered email ID...Please check your mail!!!",
       icon: 'success'
@@ -105,8 +104,7 @@ public Forgot_Password() : void{
   this.http.post<any>(GlobalConstants.apiURL+'/Login/GetPassword' ,({"userName" :form.value.email,"passwordOTP":form.value.otp}))
   .subscribe(response => {
     //get response after login sucessfully
-    console.log("Get pwd");
-    console.log(response);
+    
     
     Swal.fire({
       text: "Otp sent to registered email ID...Please check your mail!!!",

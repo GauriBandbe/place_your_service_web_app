@@ -65,8 +65,7 @@ export class ChangePasswordComponent implements OnInit {
   }
     this.submitted = true;
     var c = localStorage.getItem('token');
-    console.log(c);
-    console.log(this.b);
+    
      
     if(this.b == c){
       this.act.ResetPassword(this.userValue.value).subscribe((data)=> {console.log(data);})

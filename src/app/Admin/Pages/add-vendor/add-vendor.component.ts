@@ -106,7 +106,7 @@ gettypeofServiceList(){
 }
 
 gettypeOfServicevalue(value : any){
-  console.log(value);
+  
 }
 typeofServiceListM : Tservise[] = [];
 //For Add Vendor
@@ -148,8 +148,7 @@ onSubmit() {
   return;
  }
  //this.typeofServiceListM="["+this.typeofServiceListM+"]";
- console.log(this.typeofServiceListM);   
- console.log(this.registerForm.value);   
+ 
  // stop here if form is invalid
  //
  
@@ -167,7 +166,7 @@ onSubmit() {
  const Vtype = Number(this.registerForm.value.vendorType);
  const Vname= this.registerForm.value.vendorName;
  const vEmpStrength = Number(this.registerForm.value.vendorEmpStrength);
- console.log(Vtype)
+
  // display form values on success
  this.http.post<any>(GlobalConstants.apiURL+'/Vendor/AddVendor' ,   
  ({
@@ -183,7 +182,7 @@ onSubmit() {
 }),{ headers: reqHeader })
  .subscribe((data)=> 
  {
-   console.log(data);
+
    if(data.isAddSuccess==true){
        Swal.fire({
            text: data.message,

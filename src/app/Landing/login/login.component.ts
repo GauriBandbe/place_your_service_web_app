@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
            
             this.http.get<any>(GlobalConstants.apiURL+'/User/CurrentUser',{ headers: reqHeader } )
             .subscribe(response => {
-              console.log(response);
+              
                 if(response.userTypeCode=="0" ||  response.userTypeCode=="1" || response.userTypeCode=="2"){
                   localStorage.setItem("userCode", response.userCode);
                   localStorage.setItem("userTypeCode", response.userTypeCode);
