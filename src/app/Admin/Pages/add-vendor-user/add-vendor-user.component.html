@@ -1,0 +1,287 @@
+<mat-progress-bar *ngIf="loginstarts"  mode="indeterminate"></mat-progress-bar>
+<html class="isEmbedded ">
+<body>
+    <mat-card-title>
+        <div class="title-section" style="margin-top: 2%;margin-left: 3%;">
+          <mat-icon class="maticon" style="font-weight: 500;" routerLink="/Admin/VendorUserList">arrow_back</mat-icon>  
+          <span class="form-title" style="color:#ED8F2D !important;font-weight: 500; font-family: Roboto;
+          margin-left: 2%;line-height: 175%;font-size: smaller;"> Add Vendor User</span>
+          <span class="name role-name" fxHide fxShow.gt-xs></span>
+          
+        </div>  
+        
+      </mat-card-title>   
+
+      
+    <div class="card m-3 mat-elevation-z8">
+         <div class="card-body">
+            <div class="row">
+                <!-- <div class="col-3">
+                    <div class="form-row">
+                        <div style="text-align:center">
+                          
+                           <label class="hoverable" for="fileInput">
+                            <img [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'"> 
+                            <div class="hover-text">Choose file</div>
+                            <div class="background"></div>
+                          </label>
+                          <label>Upload Photo Here</label>
+                          <br/>
+                          <input id="fileInput" type='file' (change)="onUploadProfileFile($event)">                         
+                       </div>                                      
+                   </div>
+                </div> -->
+                <div class="col-12">
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            
+                            <div class="form-group col">
+                                
+                            </div> 
+                            
+                        </div>
+                        <div class="form-row">                       
+                            <div class="form-group col">
+                                <label>First Name</label>
+                                <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['firstName']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['firstName']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['firstName']?.errors?.['required']">First Name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Middle Name</label>
+                                <input type="text" formControlName="middleName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['middleName']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['middleName']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['middleName']?.errors?.['required']">Middle Name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Last Name</label>
+                                <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['lastName']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['lastName']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['lastName']?.errors?.['required']">Last Name is required</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label>Gender</label>
+                                <select formControlName="gender" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['gender']?.errors }">
+                                    <option value="0"></option>
+                                    <option value="M">Male </option>
+                                    <option value="F">Female </option>
+                                    <option value="T">Transgender</option>
+                                </select>
+                                <div *ngIf="submitted && registerForm.controls['gender']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['gender']?.errors?.['required']">Gender is required</div>
+                                </div>
+                            </div> 
+                            <div class="form-group col">
+                                <label>Vendor</label>
+                                <select formControlName="vendor" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['vendor']?.errors }">
+                                    <option [value]="option.value" *ngFor="let option of vendor">{{ option.viewValue }}</option>
+                                    
+                                </select>
+                                <div *ngIf="submitted && registerForm.controls['vendor']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['vendor']?.errors?.['required']">vendor is required</div>
+                                </div>
+                            </div> 
+                            <div class="form-group col">
+                                <label>Date of Birth</label>
+                                <input type="date" formControlName="date_of_Birth" class="form-control"  max={{latest_date}}
+                                style="font-family: Roboto,Helvetica Neue, sans-serif;" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['date_of_Birth']?.errors }" >
+                                 <div *ngIf="submitted && registerForm.controls['date_of_Birth']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['date_of_Birth']?.errors?.['required']">Date of Birth is required</div>
+                                    <div *ngIf="registerForm.controls['date_of_Birth']?.errors?.['min']">Date of Birth is required</div>
+                                    
+                                 </div>
+                                 
+                            </div> 
+                        </div>
+                        <div class="form-row">
+                             
+                            <div class="form-group col">
+                                <label>Email</label>
+                                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['email']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['email']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['email']?.errors?.['required']">Email is required</div>
+                                    <div *ngIf="registerForm.controls['email']?.errors?.['email']">Email must be a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Contact No</label>
+                                <input type="text" formControlName="mobile_1" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['mobile_1']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['mobile_1']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['mobile_1']?.errors?.['required']">Contact No is required</div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Blood Group</label>
+                                <select formControlName="bloodGroup_Code" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['bloodGroup_Code']?.errors }">
+                                    <option [value]="option.value" *ngFor="let option of bloodgroup">{{ option.viewValue }}</option>
+                                    
+                                </select>
+                                <div *ngIf="submitted && registerForm.controls['bloodGroup_Code']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['bloodGroup_Code']?.errors?.['required']">blood Group Type is required</div>
+                                
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="form-row">                       
+                            <div class="form-group col">
+                                <label>Address</label>
+                                <input type="text" formControlName="Address" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['Address']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['Address']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['Address']?.errors?.['required']">Address is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Address2/ Street</label>
+                                <input type="text" formControlName="Address2" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['Address2']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['Address2']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['Address2']?.errors?.['required']">Address2 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">   
+                            <div class="form-group col">
+                                <label>Landmark</label>
+                                <input type="text" formControlName="landmark" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['landmark']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['landmark']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['landmark']?.errors?.['required']">Landmark is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Zip Code</label>
+                                <input type="text" formControlName="zipCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['zipCode']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['zipCode']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['zipCode']?.errors?.['required']">Zip Code is required</div>
+                                </div>
+                            </div> 
+                            <div class="form-group col">
+                                <label>City</label>
+                                <input type="text" formControlName="City" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['City']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['City']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['City']?.errors?.['required']">City Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row"> 
+                            <div class="form-group col">
+                                <label>District</label>
+                                <input type="text" formControlName="district" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['district']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['district']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['district']?.errors?.['required']">District Name is required</div>
+                                </div>
+                            </div>  
+                            <div class="form-group col">
+                                <label>State</label>
+                                <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['state']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['state']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['state']?.errors?.['required']">State Name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Country</label>
+                                <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['country']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['country']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['country']?.errors?.['required']">Country Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">                       
+                            <div class="form-group col">
+                                <label>Technical Qualification</label>
+                                <mat-form-field appearance="outline" style="width: 100%;background-color: white;font-size: 10.5px;padding-top: 0%;" >
+                            
+                                    <mat-select [formControl]="typeofTechQualifications"  multiple [(value)]="selectedTechQualification" >
+                                      <mat-select-trigger>
+                                        {{typeofTechQualifications.value ? typeofTechQualifications.value[0] : ''}}
+                                        <span *ngIf="typeofTechQualifications.value?.length > 1" class="example-additional-selection">
+                                          (+{{typeofTechQualifications.value.length - 1}} {{typeofTechQualifications.value?.length === 2 ? 'other' : 'others'}})
+                                        </span>
+                                      </mat-select-trigger>
+                                      <mat-option *ngFor="let typeOfTechQualifications of typeofTechQualificationList" [value]="typeOfTechQualifications.viewValue" >{{typeOfTechQualifications.viewValue}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                <div *ngIf="submitted && registerForm.controls['typeOfTechQualification']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['typeOfTechQualification']?.errors?.['required']">Technician Qualification is required</div>
+                                </div>
+                            </div> 
+                            <div class="form-group col">
+                                <label>Work Experience</label>
+                                <input type="number" formControlName="workExperience" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['workExperience']?.errors }" style="margin-top: 3px;height: 39px;">
+                                <div *ngIf="submitted && registerForm.controls['workExperience']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['workExperience']?.errors?.['required']">Work Experience Name is required</div>
+                                </div>
+                            </div>
+                          
+                            <div class="form-group col">
+                                <label>Type of Work(s)</label>
+                                <mat-form-field appearance="outline" style="width: 100%;background-color: white;font-size: 10.5px;padding-top: 0%;" >
+                            
+                                    <mat-select [formControl]="typeofWorks"  multiple [(value)]="selectedWork" >
+                                      <mat-select-trigger>
+                                        {{typeofWorks.value ? typeofWorks.value[0] : ''}}
+                                        <span *ngIf="typeofWorks.value?.length > 1" class="example-additional-selection">
+                                          (+{{typeofWorks.value.length - 1}} {{typeofWorks.value?.length === 2 ? 'other' : 'others'}})
+                                        </span>
+                                      </mat-select-trigger>
+                                      <mat-option *ngFor="let typeOfWorks of typeofWorkList" [value]="typeOfWorks.viewValue" >{{typeOfWorks.viewValue}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                <div *ngIf="submitted && registerForm.controls['typeOfWork']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['typeOfWork']?.errors?.['required']">Type of Work is required</div>
+                                </div>
+                            </div> 
+                        </div>
+                        <!-- <div class="form-row">
+                            <div style="margin-left: 5px;">                              
+                               <label style="text-align:left;">Upload Adhar Photo / Front</label>
+                               <label class="hoverable2" for="fileInput2">
+                                <img class="img2" [src]="url2 ? url2 : 'https://upload.wikimedia.org/wikipedia/commons/2/27/Noun_Project_cloud_upload_icon_411593_cc.svg'" style="border-radius: 0%;"> 
+                                <div class="hover-text">Choose file</div>
+                                <div class="background"></div>
+                              </label>
+                              <br/>
+                              <input id="fileInput2" type='file' (change)="onUploadAdharFrontFile($event)">
+                           </div> 
+                           <div style="margin-left: 5%;">
+                            <label style="text-align:left;">Upload Adhar Photo / Back</label>
+                            <label class="hoverable2" for="fileInput3">
+                                <img class="img2" [src]="url3 ? url3 : 'https://upload.wikimedia.org/wikipedia/commons/2/27/Noun_Project_cloud_upload_icon_411593_cc.svg'" style="border-radius: 0%;"> 
+                                <div class="hover-text">Choose file</div>
+                                <div class="background"></div>
+                              </label>
+                              <br/>
+                              <input id="fileInput3" type='file' (change)="onUploadAdharBackFile($event)">
+                        </div>               
+                       </div> -->
+                       
+                       
+                        <div style="text-align: right!important;">
+                            <button style="background-color: #ED8F2D;color: #fff;border: 1px solid transparent;margin-right: 0.25rem!important;
+                            border: 1px solid transparent;
+                            padding: 0.375rem 0.75rem;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                            border-radius: 0.25rem;">Submit</button>
+                            <button style="background-color:red;color: #fff;border: 1px solid transparent;
+                            border: 1px solid transparent;
+                            padding: 0.375rem 0.75rem;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                            border-radius: 0.25rem;" type="reset" (click)="onReset()">Clear</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>                                     
+        </div>
+    </div> 
+</body>
+
+</html>

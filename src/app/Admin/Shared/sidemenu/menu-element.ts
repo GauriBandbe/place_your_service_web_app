@@ -17,6 +17,14 @@ export const menus = [
        
     },
     {
+        'name': 'Vendor User',
+        'icon': 'indeterminate_check_box',
+        'link': 'VendorUserList',
+        'open': false,
+        'chip': false,
+       
+    },
+    {
         'name': 'Technician',
         'icon': 'indeterminate_check_box',
         'link': 'TechnicianList',
@@ -93,6 +101,14 @@ export const Vendormenus = [
         'name': 'Technician',
         'icon': 'indeterminate_check_box',
         'link': 'TechnicianList',
+        'open': false,
+        'chip': false,
+       
+    },
+    {
+        'name': 'Vendor User',
+        'icon': 'indeterminate_check_box',
+        'link': 'VendorUserList',
         'open': false,
         'chip': false,
        

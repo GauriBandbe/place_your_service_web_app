@@ -219,7 +219,6 @@ onSubmit() {
 , (error) => {      
   this.loginstarts=false;        
   console.error("error caught in component");
-console.log(error)
 var errmsg="";
 errmsg="<ul>"
 for(var i=0;i< error.error.validationStatuses.length;i++ ){

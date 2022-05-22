@@ -12,6 +12,8 @@ import { TechnicianListComponent } from '../Pages/technician-list/technician-lis
 import { AddTechnicianComponent } from '../Pages/add-technician/add-technician.component';
 import { AddVendorComponent } from '../Pages/add-vendor/add-vendor.component';
 import { VendorListComponent } from '../Pages/vendor-list/vendor-list.component';
+import { AddVendorUserComponent } from '../Pages/add-vendor-user/add-vendor-user.component';
+import { VendorUserListComponent } from '../Pages/vendor-user-list/vendor-user-list.component';
 
 
 
@@ -26,7 +28,8 @@ const routes: Routes = [
       { path: 'CreateTechnician', component: AddTechnicianComponent },
       { path: 'VendorList', component: VendorListComponent },
       { path: 'CreateVendor', component: AddVendorComponent },
-      
+      { path: 'VendorUserList', component: VendorUserListComponent },
+      { path: 'CreateVendorUser', component: AddVendorUserComponent },      
     ]
 }
 ];

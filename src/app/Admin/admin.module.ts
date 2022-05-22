@@ -5,10 +5,8 @@ import { AdminAuthModule } from './admin-auth/admin-auth.module';
 import { ToastrService } from 'ngx-toastr';
 
 
-
 @NgModule({
-  declarations: [  
-  ],
+  declarations: [ ],
   imports: [
     CommonModule,
     AdminSharedModule,
