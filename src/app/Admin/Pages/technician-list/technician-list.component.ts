@@ -31,7 +31,9 @@ export class TechnicianListComponent implements OnInit {
   public adharStatusUrl="";
   Email : any="";
   public mode:string = "1";
-
+  public usert = Number(localStorage.getItem("userTypeCode"));
+  public vendorCodet = Number(localStorage.getItem("vendorCode"));
+  hasFilters : boolean;
   alltechdatas: any;
   UserForm : FormGroup | undefined;
   displayedColumns: string[] = ['userCode', 'Profile', 'Name', 'Mobile No','Adhar No','Adhar status','Action'];
@@ -61,6 +63,7 @@ export class TechnicianListComponent implements OnInit {
  //get all patient users list
   getTechnicianUsers()
   {
+
     console.log("getTechnicianUsers");
    let queryParams = new HttpParams().append( "hasFilters", false)
    const token = localStorage.getItem("jwt") as string;
@@ -69,11 +72,16 @@ export class TechnicianListComponent implements OnInit {
    'Content-Type': 'application/json',
    'Authorization': 'Bearer '+ token
  });
-
-    var userCode = Number(localStorage.getItem("userCode"));
-    console.log(userCode);
+ if(this.usert==1){
+  this.vendorCodet=0;
+  this.hasFilters=false;
+}else{
+  this.vendorCodet = Number(localStorage.getItem("vendorCode"));
+  this.hasFilters=true;
+}
+    
     this.http.post<any>(GlobalConstants.apiURL+'/Technician/GetTechnician' 
-    ,({"hasFilters" :true,"usePaging":true,"pageSize":10,"currentIndex":1,"userCodeList":[0],"vendorCodeList":[2]})
+    ,({"hasFilters" :this.hasFilters,"usePaging":true,"pageSize":100,"currentIndex":1,"userCodeList":[0],"vendorCodeList":[this.vendorCodet]})
     ,{ headers: reqHeader })
     .subscribe(data => {
     //  })

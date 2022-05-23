@@ -112,6 +112,7 @@ export class LoginComponent implements OnInit {
                 if(response.userTypeCode=="0" ||  response.userTypeCode=="1" || response.userTypeCode=="2"){
                   localStorage.setItem("userCode", response.userCode);
                   localStorage.setItem("userTypeCode", response.userTypeCode);
+                  localStorage.setItem("vendorCode", response.vendorCode);
                   this.router.navigate(['/Admin/Dashboard']);
                   this.loginstarts=false;
               }

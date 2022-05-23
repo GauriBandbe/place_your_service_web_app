@@ -15,14 +15,6 @@ export class SidemenuComponent implements OnInit {
     public Vmenus = Vendormenus;
     public usert = Number(localStorage.getItem("userTypeCode"));
    
-    
-    // if(localStorage.getItem("userCode") == "2")
-    // {
-    //    menus = menus;
-    // }
-    // else{
-    
-    // }
     constructor() { }
 
     ngOnInit() {
