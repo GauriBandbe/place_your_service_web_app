@@ -29,7 +29,9 @@ export interface UserData {
   styleUrls: ['./vendor-user-list.component.scss']
 })
 export class VendorUserListComponent implements OnInit {
-
+  public usert = Number(localStorage.getItem("userTypeCode"));
+  public vendorCodet = Number(localStorage.getItem("vendorCode"));
+  hasFilters : boolean;
   public adharStatusUrl="";
   Email : any="";
   public mode:string = "1";
@@ -63,6 +65,15 @@ export class VendorUserListComponent implements OnInit {
  //get all patient users list
   getTechnicianUsers()
   {
+
+    if(this.usert==1){
+      this.vendorCodet=0;
+      this.hasFilters=false;
+    }else{
+      this.vendorCodet = Number(localStorage.getItem("vendorCode"));
+      this.hasFilters=true;
+    }
+
    let queryParams = new HttpParams().append( "hasFilters", false)
    const token = localStorage.getItem("jwt") as string;
 		 
@@ -75,8 +86,8 @@ export class VendorUserListComponent implements OnInit {
     console.log(userCode);
     this.http.post<any>(GlobalConstants.apiURL+'/User/GetUser' 
     ,({
-      "hasFilters" :false,"usePaging":true,"pageSize":100,"currentIndex":1,      
-      "userCodeList":[2],"userTypeList":[0],
+      "hasFilters" :this.hasFilters,"usePaging":true,"pageSize":100,"currentIndex":1,      
+      "userCodeList":[0],"userTypeList":[this.vendorCodet],
       "gender": [
       ],
       "userTitle": [

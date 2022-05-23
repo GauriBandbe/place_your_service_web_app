@@ -32,7 +32,8 @@ interface Tservise {
 export class AddVendorUserComponent implements OnInit {
 
   file: File ;
-  // console.log(latest_date)
+  public usert = Number(localStorage.getItem("userTypeCode"));
+  public vendorCodet = Number(localStorage.getItem("vendorCode"));
    public loginstarts :boolean =false;
    registerForm!: FormGroup;
    submitted = false;
@@ -63,12 +64,12 @@ export class AddVendorUserComponent implements OnInit {
             mobile_2: [''],
             landLine: [''],
             date_of_Birth: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],        
-            uidaI_Aadhar: ['123456789012'],
+            uidaI_Aadhar: ['', [Validators.required,Validators.pattern("[0-9]{12}")] ],
             uidaI_Aadhar_Masked: [''],
             bloodGroup_Code: ['', Validators.required],            
             vendorCode: [2],
             postalAddress: ['Mumbai'],
-            vendor:['', Validators.required],
+            vendor:[''],
             Address: ['', Validators.required],
             Address2: ['', Validators.required],
             City: ['', Validators.required],
@@ -341,6 +342,18 @@ getBloodgroupList(){
 typeofWorkListM : Tservise[] = [];
 typeofTechQualificationListM : Tservise[] = [];
 onSubmit() {
+  if(this.usert==1){
+    this.vendorCodet=Number(this.registerForm.value.vendor);
+    if(this.vendorCodet==0){
+      Swal.fire({
+        text: "Please select vendor.",
+        icon: 'error'
+      });
+      return;
+    }
+  }else{
+    this.vendorCodet = Number(localStorage.getItem("vendorCode"));
+  }
   this.typeofWorkListM=[];
   this.typeofWorkList2=[];
   this.typeofTechQualificationListM=[];
@@ -350,7 +363,7 @@ onSubmit() {
   var user = this.registerForm.value
     
   console.log(this.registerForm.value);   
-  this.registerForm.value.vendorCode =2;
+  this.registerForm.value.uidaI_Aadhar =String(this.registerForm.value.uidaI_Aadhar);
   this.registerForm.value.titleCode = 1;
   this.registerForm.value.bloodGroup_Code = Number(this.registerForm.value.bloodGroup_Code);
   // stop here if form is invalid
@@ -447,7 +460,7 @@ onSubmit() {
    "uidaI_Aadhar": this.registerForm.value.uidaI_Aadhar,
    "uidaI_Aadhar_Masked": "",
    "bloodGroup_Code": this.registerForm.value.bloodGroup_Code,
-   "vendorCode": 2,
+   "vendorCode": this.vendorCodet,
    //"workTypeCodeList": this.typeofWorkListM,
   // "qualificationCodeList": this.typeofTechQualificationListM,
    "postalAddress":  this.registerForm.value.Address + " " + this.registerForm.value.Address2 + " " + this.registerForm.value.landmark +" "

@@ -77,8 +77,8 @@
                                     <div *ngIf="registerForm.controls['gender']?.errors?.['required']">Gender is required</div>
                                 </div>
                             </div> 
-                            <div class="form-group col">
-                                <label>Vendor</label>
+                            <div class="form-group col" *ngIf="usert == 1;">
+                                <label >Vendor</label>
                                 <select formControlName="vendor" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['vendor']?.errors }">
                                     <option [value]="option.value" *ngFor="let option of vendor">{{ option.viewValue }}</option>
                                     
@@ -86,7 +86,7 @@
                                 <div *ngIf="submitted && registerForm.controls['vendor']?.errors" class="invalid-feedback">
                                     <div *ngIf="registerForm.controls['vendor']?.errors?.['required']">vendor is required</div>
                                 </div>
-                            </div> 
+                            </div>  
                             <div class="form-group col">
                                 <label>Date of Birth</label>
                                 <input type="date" formControlName="date_of_Birth" class="form-control"  max={{latest_date}}
@@ -237,6 +237,18 @@
                                     <div *ngIf="registerForm.controls['typeOfWork']?.errors?.['required']">Type of Work is required</div>
                                 </div>
                             </div> 
+                        </div>
+                        <div class="form-row">
+                            
+                            <div class="form-group col-5">
+                                <label>Adhar No</label>
+                                <input type="number" minlength="12" formControlName="uidaI_Aadhar" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['uidaI_Aadhar']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['uidaI_Aadhar']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['uidaI_Aadhar']?.errors?.['required']">Adhar No with 12 digit is required</div>
+                                    
+                                </div>
+                            </div>
+                           
                         </div>
                         <!-- <div class="form-row">
                             <div style="margin-left: 5px;">                              
