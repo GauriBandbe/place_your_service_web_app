@@ -133,7 +133,7 @@ getPincodeList(value : any) {
   'Content-Type': 'application/json',
   'Authorization': 'Bearer '+ token
 });
-this.http.get<any>(GlobalConstants.apiURL+'/MasterData/SearchPincode'+ `?pincode=` + value,{headers: reqHeader} )
+this.http.get<any>(GlobalConstants.apiURL+'/Vendor/SearchVendorPagePincode'+ `?pincode=` + value,{headers: reqHeader} )
 .subscribe(response => {
   
   for(var i=0; i<response.length;i++){
@@ -243,6 +243,33 @@ Remove_PincodeData(Pinno:number)
   }) 
  
 }
+
+getpincodeListAgainstVendor(){
+  this.PincodeTableList=[];
+ const VenCode_1=Number(this.registerForm.value.vendor);
+ const token = localStorage.getItem("jwt") as string;
+  var reqHeader = new HttpHeaders({ 
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer '+ token
+});
+this.http.post<any>(GlobalConstants.apiURL+'/Vendor/GetVendorPinAndService' ,   
+({
+  "code": VenCode_1
+}),{ headers: reqHeader })
+.subscribe((response)=> 
+    {
+      for(var i=0; i<response.pinCodeList.length;i++){
+        var pinL2={ district :response.pinCodeList[i].district ,
+          state :response.pinCodeList[i].state ,
+          key :response.pinCodeList[i].key ,
+          value :response.pinCodeList[i].value ,
+          description : response.pinCodeList[i].value +"-"+response.pinCodeList[i].description
+        ,descriptionM : response.pinCodeList[i].description } ;      
+        this.PincodeTableList.push(pinL2)
+      }
+    }
+  )               
+}
 //For Submit
 typeofServiceListM : Tservise[] = [];
 PincodeTableListM : Tservise[] = [];
@@ -311,63 +338,72 @@ const token = localStorage.getItem("jwt") as string;
 });
 console.log(this.vendorCodet);
 console.log(this.PincodeTableListM);
-this.http.post<any>(GlobalConstants.apiURL+'/Vendor/SaveVendorPincodes' ,   
+this.http.post<any>(GlobalConstants.apiURL+'/Vendor/SaveVendorServiceType' ,   
 ({
   "vendorCode": this.vendorCodet,
-  "codeList": this.PincodeTableListM
+  "codeList": this.typeofServiceListM
 }),{ headers: reqHeader })
 .subscribe((data)=> 
     {
-   
-      //if(data.isAddSuccess==true){         
-            //*********************************For Saving service type***************** */
-                this.http.post<any>(GlobalConstants.apiURL+'/Vendor/SaveVendorServiceType' ,   
-                ({
-                  "vendorCode": this.vendorCodet,
-                  "codeList": this.typeofServiceListM
-                }),{ headers: reqHeader })
-                .subscribe((data)=> 
-                    {
-
-                      Swal.fire({
-                        text: "Data added successfully !!!",
-                        icon: 'success',
-                        
-                      });
-                      
-                      setTimeout(() => {this.domDocument.location.reload()}, 1000);
-                      this.loginstarts=false;
-                            
-                    }, 
-                    (error) => 
-                    {      
-                      this.loginstarts=false;        
-                      console.error("error caught in component");
-                      var errmsg="";
-                      errmsg="<ul>"
-                      for(var i=0;i< error.error.validationStatuses.length;i++ ){
-                      errmsg+= "<li>" + error.error.validationStatuses[i].validationMessage +"</li>"
-                      }      
-                      errmsg+="</ul>"
-                      Swal.fire({
-                      title: '<strong>'+error.error.message+'</strong>',
-                      icon: 'info',
-                      html:errmsg,
-                      showCloseButton: true,
-                      showCancelButton: true,
-                      focusConfirm: false      })
-                      //throw error;   //You can also throw the error to a global error handler
-                    }
-                  ) 
-            //*********************************For Saving service type***************** */
-            //setTimeout(() => {this.domDocument.location.reload()}, 1000);
-      // }
-      // else{
-      //     Swal.fire({
-      //         text: data.message,
-      //         icon: 'error'
-      //       });
-      // }
+     //*********************************For Saving pincode type***************** */
+     this.http.post<any>(GlobalConstants.apiURL+'/Vendor/SaveVendorPincodes' ,   
+     ({
+       "vendorCode": this.vendorCodet,
+       "codeList": this.PincodeTableListM
+     }),{ headers: reqHeader })
+     .subscribe((data)=> 
+         {
+           if(data.isAddSuccess==true){ 
+             Swal.fire({
+               text: data.message,
+               icon: 'success',
+               
+             });
+             this.PincodeTableList=[];
+             /********************************get pincode list */
+             for(var i=0; i<data.pincodeDataList.length;i++){
+               var pinL2={ district :data.pincodeDataList[i].district ,
+                 state :data.pincodeDataList[i].state ,
+                 key :data.pincodeDataList[i].key ,
+                 value :data.pincodeDataList[i].value ,
+                 description : data.pincodeDataList[i].value +"-"+data.pincodeDataList[i].description
+               ,descriptionM : data.pincodeDataList[i].description } ;      
+               this.PincodeTableList.push(pinL2)
+             }
+             /******************************************* */
+           }
+           else{
+             Swal.fire({
+                 text: data.message,
+                 icon: 'error'
+               });
+           }
+          
+          // setTimeout(() => {this.domDocument.location.reload()}, 1000);
+           this.loginstarts=false;
+                 
+         }, 
+         (error) => 
+         {      
+           this.loginstarts=false;        
+           console.error("error caught in component");
+           var errmsg="";
+           errmsg="<ul>"
+           for(var i=0;i< error.error.validationStatuses.length;i++ ){
+           errmsg+= "<li>" + error.error.validationStatuses[i].validationMessage +"</li>"
+           }      
+           errmsg+="</ul>"
+           Swal.fire({
+           title: '<strong>'+error.error.message+'</strong>',
+           icon: 'info',
+           html:errmsg,
+           showCloseButton: true,
+           showCancelButton: true,
+           focusConfirm: false      })
+           //throw error;   //You can also throw the error to a global error handler
+         }
+       ) 
+ //*********************************For Saving pincode type***************** */
       this.loginstarts=false;
             
     }, 

@@ -19,7 +19,7 @@
                 <div class="form-row">                         
                     <div class="form-group col" >
                         <label >Vendor</label>
-                        <select formControlName="vendor" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['vendor']?.errors }">
+                        <select formControlName="vendor" (change)="getpincodeListAgainstVendor()" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['vendor']?.errors }">
                             <option [value]="option.value" *ngFor="let option of vendor">{{ option.viewValue }}</option>
                             
                         </select>
