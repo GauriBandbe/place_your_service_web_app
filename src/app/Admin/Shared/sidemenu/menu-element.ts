@@ -1,8 +1,10 @@
 
+
 export const menus = [
+    
     {
         'name': 'Dashboard',
-        'icon': 'dashboard',
+        'icon': 'Dashboard_Icon', 
         'link': 'Dashboard',
         'open': false,
         'chip': { 'value': 1, 'color': 'accent' },
@@ -10,15 +12,23 @@ export const menus = [
     },   
     {
         'name': 'Vendor',
-        'icon': 'indeterminate_check_box',
+        'icon': 'Vendor_Icon',
         'link': 'VendorList',
         'open': false,
         'chip': false,
        
     },
     {
+        'name': 'Vedor Service',
+        'icon': 'Vendor_Icon',
+        'link': 'VendorServices',
+        'open': false,
+        'chip': false,
+       
+    },
+    {
         'name': 'Vendor User',
-        'icon': 'indeterminate_check_box',
+        'icon': 'Vendor_Icon',
         'link': 'VendorUserList',
         'open': false,
         'chip': false,
@@ -26,7 +36,7 @@ export const menus = [
     },
     {
         'name': 'Technician',
-        'icon': 'indeterminate_check_box',
+        'icon': 'Vendor_Icon',
         'link': 'TechnicianList',
         'open': false,
         'chip': false,
@@ -34,25 +44,15 @@ export const menus = [
     },
     {
         'name': 'Service Request',
-        'icon': 'perm_data_setting',
-        'link': 'diagnosis',
+        'icon': 'Service_Icon',
+        'link': 'Dashboard',
         'open': false,
         'chip': false,
-        // 'sub': [
-        //     {
-        //         'name': 'Dignosis Data',
-        //         'link': 'diagnosis',
-        //         'icon': 'indeterminate_check_box',
-        //         'chip': false,
-        //         'open': false,
-        //     },
-        
-        // ]
     },
     {
         'name': 'Service History',
-        'icon': 'perm_data_setting',
-        'link': 'diagnosis',
+        'icon': 'Service_Icon',
+        'link': 'Dashboard',
         'open': false,
         'chip': false,
         // 'sub': [
@@ -63,27 +63,6 @@ export const menus = [
         //         'chip': false,
         //         'open': false,
         //     },
-        //     {
-        //         'name': 'Medication Data',
-        //         'link': 'medication',
-        //         'icon': 'list',
-        //         'chip': false,
-        //         'open': false,
-        //     },
-        //     {
-        //         'name': 'Procedural Data',
-        //         'link': 'procedure',
-        //         'icon': 'list',
-        //         'chip': false,
-        //         'open': false,
-        //     },
-        //     {
-        //         'name': 'Allergy Data',
-        //         'link': 'allergy',
-        //         'icon': 'list',
-        //         'chip': false,
-        //         'open': false,
-        //     }
         // ]
     },
 ];
@@ -91,7 +70,7 @@ export const menus = [
 export const Vendormenus = [
     {
         'name': 'Dashboard',
-        'icon': 'dashboard',
+        'icon': 'Dashboard_Icon',
         'link': 'Dashboard',
         'open': false,
         'chip': { 'value': 1, 'color': 'accent' },
@@ -99,7 +78,7 @@ export const Vendormenus = [
     },
     {
         'name': 'Technician',
-        'icon': 'indeterminate_check_box',
+        'icon': 'Vendor_Icon',
         'link': 'TechnicianList',
         'open': false,
         'chip': false,
@@ -107,7 +86,7 @@ export const Vendormenus = [
     },
     {
         'name': 'Vendor User',
-        'icon': 'indeterminate_check_box',
+        'icon': 'Vendor_Icon',
         'link': 'VendorUserList',
         'open': false,
         'chip': false,
@@ -115,57 +94,17 @@ export const Vendormenus = [
     },
     {
         'name': 'Service Request',
-        'icon': 'perm_data_setting',
-        'link': 'diagnosis',
+        'icon': 'Service_Icon',
+        'link': 'Dashboard',
         'open': false,
         'chip': false,
-        // 'sub': [
-        //     {
-        //         'name': 'Dignosis Data',
-        //         'link': 'diagnosis',
-        //         'icon': 'indeterminate_check_box',
-        //         'chip': false,
-        //         'open': false,
-        //     },
-        
-        // ]
     },
     {
         'name': 'Service History',
-        'icon': 'perm_data_setting',
-        'link': 'diagnosis',
+        'icon': 'Service_Icon',
+        'link': 'Dashboard',
         'open': false,
-        'chip': false,
-        // 'sub': [
-        //     {
-        //         'name': 'Dignosis Data',
-        //         'link': 'diagnosis',
-        //         'icon': 'indeterminate_check_box',
-        //         'chip': false,
-        //         'open': false,
-        //     },
-        //     {
-        //         'name': 'Medication Data',
-        //         'link': 'medication',
-        //         'icon': 'list',
-        //         'chip': false,
-        //         'open': false,
-        //     },
-        //     {
-        //         'name': 'Procedural Data',
-        //         'link': 'procedure',
-        //         'icon': 'list',
-        //         'chip': false,
-        //         'open': false,
-        //     },
-        //     {
-        //         'name': 'Allergy Data',
-        //         'link': 'allergy',
-        //         'icon': 'list',
-        //         'chip': false,
-        //         'open': false,
-        //     }
-        // ]
+        'chip': false,      
     },
 ];
 

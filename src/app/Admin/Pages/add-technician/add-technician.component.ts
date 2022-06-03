@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe} from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router'; 
@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileUploadService } from 'src/app/file-upload.service';
 import { GlobalConstants } from 'src/app/GlobalConstants';
 import { kMaxLength } from 'buffer';
+import { map, Observable, startWith } from 'rxjs';
 
 interface TypeofWork {
   value: number;
@@ -24,6 +25,17 @@ interface Bloodgroup{
 }
 interface Tservise {
   //id: number;
+}
+interface Pincodedrodown{
+  key: string;
+  viewValue: string;
+}
+interface Pincode{
+  district :string;
+  state :string;
+  key :number;
+  value: string;
+  description: string;
 }
 @Component({
   selector: 'app-add-technician',
@@ -44,12 +56,13 @@ export class AddTechnicianComponent  implements OnInit {
     private formBuilder: FormBuilder, public datepipe: DatePipe,
     private act : AuthGuard , private route: ActivatedRoute,
     private notifyService : NotificationService,private http: HttpClient, 
-    private fileUploadService: FileUploadService,) { } 
-
+    private fileUploadService: FileUploadService,private fb: FormBuilder,private el:ElementRef) { } 
+    @ViewChildren('ngSelect') ngSelect:ElementRef;
     todayDate:Date = new Date();
     latest_date =this.datepipe.transform(this.todayDate, 'yyyy-MM-dd');
 
     ngOnInit() {
+   
         this.getVendorList();
         this.getBloodgroupList();
         this.gettypeofWorkList();
@@ -75,9 +88,10 @@ export class AddTechnicianComponent  implements OnInit {
             Address2: ['', Validators.required],
             City: ['', Validators.required],
             state: ['', Validators.required],
-            country: ['', Validators.required],
+            country: [''],
             district: ['', Validators.required],
-            zipCode: ['', Validators.required],
+            pinCode: [''],
+            pinCode_key: [''],
             landmark: ['', Validators.required],
             //technicalQualification: ['', Validators.required],
             workExperience: ['', Validators.required],
@@ -355,11 +369,19 @@ onSubmit() {
   this.registerForm.value.uidaI_Aadhar =String(this.registerForm.value.uidaI_Aadhar);
   this.registerForm.value.titleCode = 1;
   this.registerForm.value.bloodGroup_Code = Number(this.registerForm.value.bloodGroup_Code);
+  this.registerForm.value.pinCode_key = Number(this.registerForm.value.pinCode_key);
   // stop here if form is invalid
   //
-  
+ 
   if (this.registerForm.invalid) {
       return;
+  }
+  if(this.registerForm.value.pinCode_key==""){
+    Swal.fire({
+      text: "Please select pincode.",
+      icon: 'error'
+    });
+    return;
   }
  //For TechQualification
  if(this.typeofTechQualifications.value != null){
@@ -464,7 +486,11 @@ if(this.usert==1){
    "workTypeCodeList": this.typeofWorkListM,
    "qualificationCodeList": this.typeofTechQualificationListM,
    "postalAddress":  this.registerForm.value.Address + " " + this.registerForm.value.Address2 + " " + this.registerForm.value.landmark +" "
-   + this.registerForm.value.zipCode +" "+ this.registerForm.value.city +" " + this.registerForm.value.district+ " " + this.registerForm.value.state+ " " + this.registerForm.value.country
+   + " "+ this.registerForm.value.city +" " + this.registerForm.value.district+ " " + this.registerForm.value.state,
+   "addressZipCode": this.registerForm.value.pinCode_key,
+   "addressLine_1": this.registerForm.value.Address,
+   "addressLine_2": this.registerForm.value.Address2,
+   "addressLandMark": this.registerForm.value.landmark
    }),{ headers: reqHeader })
   //this.act.CreateTechnicianUser(this.registerForm.value)
   .subscribe((data)=> 
@@ -528,6 +554,196 @@ onReset() {
   this.submitted = false;
   this.registerForm.reset();
 }
-//End For Add Technician
+//For Drop down
 
+
+  // pincodes: string[];
+  // pincode: Pincodedrodown[] = [];
+  // pincodeMaster: Pincode[] = [];
+  // getPincodeList(value : string){
+  //   console.log(value.length);
+  //   value="415605"
+  //   const token = localStorage.getItem("jwt") as string;
+       
+  //           var reqHeader = new HttpHeaders({ 
+  //           'Content-Type': 'application/json',
+  //           'Authorization': 'Bearer '+ token
+  //         });
+   
+  //   this.http.get<any>(GlobalConstants.apiURL+'/MasterData/SearchPincode'+ `?pincode=` + value,{headers: reqHeader} )
+  //   .subscribe(response => {
+  //     console.log(response);
+      
+  //     for(var i=0; i<response.length;i++){
+  //       var pinL={ key :response[i].key ,viewValue : response[i].description } ;      
+  //       this.pincode.push(pinL);
+  //       this.pincodes = response[i].description;
+  //     }
+  //     for(var i=0; i<response.length;i++){
+  //       var pinL2={ district :response[i].district ,state :response[i].state ,key :response[i].key ,value :response[i].value ,description : response[i].description } ;      
+  //       this.pincodeMaster.push(pinL2)
+  //     }
+  //     console.log( this.pincode);
+  //     console.log( this.pincodeMaster);
+  //   })
+  // }
+  // selectedCars = [3];
+  // cars = [
+  //  { id: 1, name: 'Volvo' },
+  //  { id: 2, name: 'Saab' },
+  //  { id: 3, name: 'Opel' },
+  //  { id: 4, name: 'Audi' },
+  // ];
+
+  // keydownInDropdown(event : any)
+  //  {
+  //    console.log("event");
+  //    console.log(event);
+
+  //    if (event.keyCode == 13)
+  //    {
+  //      // set highlighted value as selected value. (default)
+  //      this.getPincodeList(event);
+  //    }
+
+  //    if (event.keyCode == 37 || event.keyCode == 39)
+  //    {
+  //      // set highlighted value as selected value.
+  //      console.log(event);
+  //    }
+  //    // console.log("keydown is ",event)
+  //  }
+   
+  //  makeChoice(e:any) {
+
+  //     if(e.key==='ArrowRight' || e.key==='ArrowLeft') {
+
+  //       var totalOptions = this.ngSelect["first"].dropdownPanel.contentElementRef.nativeElement.children;
+  //       console.log("total opetions are ",totalOptions);
+  //       var i;
+
+  //       for(i=0;i<totalOptions.length;i++) {
+
+  //           if(totalOptions[i].classList.value.includes('ng-option-marked')) {
+  //            // console.log("selected index is ",i);
+  //            this.selectedCars = i;
+  //            totalOptions[i].click();
+
+  //           }
+  //        }
+
+  //     }
+  //  } 
+
+ //////////////////////////////////
+ pincodes: string[];
+ pincode: Pincodedrodown[] = [];
+ pincodeMaster: Pincode[] = [];
+ userList1: Pincode[] = [];
+ userData: Pincode[] = [];
+ userDatakey: Pincode[] = [];
+
+ lastkeydown1: number = 0;
+ subscription: any;
+ zipcontrol = new FormControl;
+ getUserIdsFirstWay($event : any) {
+   let userId = (<HTMLInputElement>document.getElementById('userIdFirstWay')).value;
+ 
+   console.log("userId2")
+   console.log(userId)
+   this.userList1 = [];
+
+   if (userId.length >= 5) {
+     if ($event.timeStamp - this.lastkeydown1 > 200) {
+       this.getPincodeList(userId)
+       this.userList1 = this.searchFromArray(this.userData, userId);
+          
+    }
+    if(this.userList1.length==0 && userId.length >= 8){
+      console.log( "userList1");
+      this.userDatakey = this.searchkeyFromArray(this.pincodeMaster, userId);
+      console.log( this.userDatakey );
+      this.getAllAddressValue(userId);
+    }
+     
+   }
+ }  
+
+ searchFromArray(arr : any, regex : any) {
+   console.log("arr"); console.log(arr);
+   //let matches = [], i;
+   let matches = [], i;
+   
+   for (i = 0; i < arr.length; i++) {
+     if (arr[i].value.match(regex)) {
+       matches.push(arr[i]);
+     }
+   }
+   //matches.pop();
+   console.log( "matches");
+   console.log( regex);
+   console.log( matches);
+   return matches;
+ };
+
+ searchkeyFromArray(arr : any, regex : any) {
+  console.log("arr"); console.log(arr);
+  //let matches = [], i;
+  let matches = [], i;
+  
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i].value.match(regex)) {
+      matches.push(arr[i]);
+    }
+  }
+  //matches.pop();
+  console.log( "matches");
+  console.log( regex);
+  console.log( matches);
+  return matches;
+};
+ getPincodeList(value : any) {
+  //this.pincodeMaster=[];
+   const token = localStorage.getItem("jwt") as string;
+      
+           var reqHeader = new HttpHeaders({ 
+           'Content-Type': 'application/json',
+           'Authorization': 'Bearer '+ token
+         });
+  
+   this.http.get<any>(GlobalConstants.apiURL+'/MasterData/SearchPincode'+ `?pincode=` + value,{headers: reqHeader} )
+   .subscribe(response => {
+     
+     
+     // for(var i=0; i<response.length;i++){
+     //   var pinL={ key :response[i].key ,viewValue : response[i].description } ;      
+     //   this.pincode.push(pinL);
+     //   this.pincodes = response[i].description;
+     //   this.userList1 = response[i].description;
+     // }
+     for(var i=0; i<response.length;i++){
+       var pinL2={ district :response[i].district ,state :response[i].state ,key :response[i].key ,value :response[i].value ,description : response[i].value +"-"+response[i].description } ;      
+       this.pincodeMaster.push(pinL2)
+     }
+  
+   Object.assign(this.userData, this.pincodeMaster);
+  
+    })
+ 
+   //return this.http.get('/src/app/data/users.json', { headers });
+  }
+  selectedLevel : any;
+  selected(){
+    alert(this.selectedLevel.name)
+  }
+  getAllAddressValue(userIdkey: any){
+    console.log("keysss")
+    console.log(userIdkey)
+    let index  = this.pincodeMaster.findIndex(item => item.description == userIdkey);
+    if(index>0){
+      this.registerForm.get("district")?.setValue(this.pincodeMaster[index].district);
+      this.registerForm.get("state")?.setValue(this.pincodeMaster[index].state);
+      this.registerForm.get("pinCode_key")?.setValue(this.pincodeMaster[index].key);
+    } 
+  }
 }

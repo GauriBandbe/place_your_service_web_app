@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-sidemenu-item',
@@ -15,6 +16,7 @@ export class SidemenuItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   openLink() {

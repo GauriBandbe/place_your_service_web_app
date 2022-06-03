@@ -1,51 +1,53 @@
-<div class="toolbar-user-container" style="justify-content: left;">
-	<button mat-button (click)="isOpen = !isOpen" class="toolbar-user-btn" [class.open]="isOpen" [ngStyle.xs]="{'min-width': '70px'}">
-  		<span fxLayout="row" fxLayoutAlign="start right" >
-    		<img class="avatar"  [src]=" './assets/images/Beared Guy02-min 2.png'" style="margin-top: 7%;">
-    		<span class="name profile-name" fxHide fxShow.gt-xs>{{ProfileName}}</span>
-			<span class="name role-name" fxHide fxShow.gt-xs>{{ProfileRole}}</span>
-    		<mat-icon class="icon" fxHide fxShow.gt-xs style="margin-top: 10%;">keyboard_arrow_down</mat-icon>
-  		</span>
-  	</button>
-
-
-  	<div class="dropdown mat-elevation-z1" [class.open]="isOpen">
-    	<div class="content">
-      		<mat-nav-list>
-      			<mat-list-item (click)="users()">
-      				<a matLine >Profile</a>
-				    <button mat-icon-button>
-				       <mat-icon>account_circle</mat-icon>
-				    </button>
-      			</mat-list-item>
-
-				 
-      			<mat-list-item [matMenuTriggerFor]="Settingsubmenu">
-      				<a matLine >Settings</a>
-				    <button mat-icon-button>
-				       <mat-icon>settings</mat-icon>
-				    </button>
-      			</mat-list-item>
-      			<mat-list-item>
-      				<a matLine >Help</a>
-				    <button mat-icon-button>
-				       <mat-icon>help</mat-icon>
-				    </button>
-      			</mat-list-item>
-
-      			<mat-divider></mat-divider>
-
-      			<mat-list-item (click)="logOut()">
-      				<a matLine >Logout</a>
-				    <button mat-icon-button>
-				       <mat-icon>exit_to_app</mat-icon>
-				    </button>
-      			</mat-list-item>
-      		</mat-nav-list>
-
-			  <mat-menu #Settingsubmenu="matMenu" >
-				<button mat-menu-item (click)="openDialog()">Change Password</button>
-			  </mat-menu>
-    	</div>
-  	</div>
-</div>
+<html>
+	<div class="toolbar-user-container" style="justify-content: left;font-family:Roboto">
+		<button mat-button (click)="isOpen = !isOpen" class="toolbar-user-btn" [class.open]="isOpen" [ngStyle.xs]="{'min-width': '70px'}">
+			  <span fxLayout="row" fxLayoutAlign="start right" >
+				<img class="avatar"  [src]=" './assets/images/Beared Guy02-min 2.png'" style="margin-top: 12%;">
+				<span class="name profile-name" fxHide fxShow.gt-xs style=" margin-right: 40px;">{{ProfileName}}</span>
+				<span class="name role-name" fxHide fxShow.gt-xs  style=" margin-right: 8px;">{{ProfileRole}}</span>
+				<!-- <mat-icon class="icon" fxHide fxShow.gt-xs style="margin-top: 16%;">keyboard_arrow_down</mat-icon> -->
+			  </span>
+		  </button>
+	
+	
+		  <div class="dropdown mat-elevation-z1" [class.open]="isOpen">
+			<div class="content">
+				  <mat-nav-list>
+					  <mat-list-item (click)="users()">
+						  <a matLine >Profile</a>
+						<button mat-icon-button>
+						   <mat-icon>account_circle</mat-icon>
+						</button>
+					  </mat-list-item>
+	
+					 
+					  <mat-list-item [matMenuTriggerFor]="Settingsubmenu">
+						  <a matLine >Settings</a>
+						<button mat-icon-button>
+						   <mat-icon>settings</mat-icon>
+						</button>
+					  </mat-list-item>
+					  <mat-list-item>
+						  <a matLine >Help</a>
+						<button mat-icon-button>
+						   <mat-icon>help</mat-icon>
+						</button>
+					  </mat-list-item>
+	
+					  <mat-divider></mat-divider>
+	
+					  <mat-list-item (click)="logOut()">
+						  <a matLine >Logout</a>
+						<button mat-icon-button>
+						   <mat-icon>exit_to_app</mat-icon>
+						</button>
+					  </mat-list-item>
+				  </mat-nav-list>
+	
+				  <mat-menu #Settingsubmenu="matMenu" >
+					<button mat-menu-item (click)="openDialog()">Change Password</button>
+				  </mat-menu>
+			</div>
+		  </div>
+	</div>
+</html>

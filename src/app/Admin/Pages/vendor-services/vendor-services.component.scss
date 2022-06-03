@@ -6,7 +6,7 @@ html {
 }
 body {
     margin: 0;
-    font-family:Roboto;
+    font-family: Roboto;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -112,7 +112,9 @@ label {
   .form-control{
     display: block;
     width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
+    // height: calc(1.5em + 0.75rem + 2px);
+    height: 39px;
+
     padding-left: 0.75rem;
     font-size: 0.875rem;
     font-weight: 400;
@@ -338,4 +340,71 @@ button, input, optgroup, select, textarea {
 }
   .mat-form-field-infix {
     padding: 0;
+}
+//*********For Table********//
+
+.table-bordered {
+  border: 1px solid #c8ced3;
+}
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #23282c;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+table {
+  display: table;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: 2px;
+  border-color: grey;
+}
+thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+.table-bordered thead th, .table-bordered thead td {
+  border-bottom-width: 2px;
+}
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #c8ced3;
+}
+.table-bordered th, .table-bordered td {
+  border: 1px solid #c8ced3;
+}
+.Proctable-sm th, .Proctable-sm td {
+  padding: 0.3rem;
+}
+.Proctable th, .Proctable td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #c8ced3;
+}
+
+th {
+  text-align: inherit;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+td {
+  color: #5c6873;
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+@media only screen and (max-width: 600px) {
+  .patientVisitDetailContainer{
+    max-width: 400px;
+  }
+
 }

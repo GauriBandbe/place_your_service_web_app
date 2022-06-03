@@ -10,9 +10,10 @@
     <div style="height: 20px;margin-bottom: 2%" fxLayoutAlign="space-around center"  >
       <h4 style="color: white;">Admin</h4>
     </div> -->
+    
     <div *ngIf="usert != 2;">
     <app-sidemenu-item  *ngFor="let menu of menus" 
-    [menu]="menu" [iconOnly]="iconOnly"
+    [menu]="menu" 
     > </app-sidemenu-item>
    </div> 
    <div *ngIf="usert == 2;">

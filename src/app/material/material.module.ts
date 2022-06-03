@@ -35,6 +35,8 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ToastrModule } from 'ngx-toastr';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -82,7 +84,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     MatExpansionModule,
     ToastrModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgSelectModule,
+    MatProgressSpinnerModule 
   ],
   
   providers: [

@@ -1,20 +1,80 @@
 
-<div style="padding-top: 20px;" fxLayout="row" fxLayout="row wrap" fxLayoutAlign="center center">
-  <div *ngFor="let dash of dashCard" fxFlex="25" fxFlex.lt-sm="100" fxFlex.lt-md="50"  >
-      <div  fxLayout="row"  class="dashcard mat-elevation-z4 "   >
-          <div fxFlex="40" fxLayout="row"  fxLayoutAlign="center center" [style.background]="dash?.colorLight">
-              <mat-icon  class="cardIcon">{{dash.icon}}</mat-icon>
+<div style="padding-top: 20px;background-color: #F5F5F5;" fxLayout="row" fxLayout="row wrap" fxLayoutAlign="center center">
+ <div *ngFor="let dash of dashCard" fxFlex="25" fxFlex.lt-sm="100" fxFlex.lt-md="50"  >
+      <!-- <div  fxLayout="row"  class="dashcard mat-elevation-z4 "   >
+           <div fxFlex="40" fxLayout="row"  fxLayoutAlign="center center" [style.background]="dash?.colorLight">
+              <mat-icon  class="cardIcon"> <mat-progress-spinner mode="determinate" value='66' diameter="45"></mat-progress-spinner></mat-icon>
           </div>
           <div  fxFlex="60" fxLayout="column" fxLayoutAlign="center center" [style.background]="dash?.colorDark" >
               <div style="color: white;font-size: 40px">
                   {{ dash.number }}
               </div>
               <p class="mat-body-1 border-top">
-                  <!-- {{dash.title}} -->
+                20
               </p>
+             
+          </div> 
+          <img src={{dash.icon}} style="margin-left: -19px;margin-top: -16px;HEIGHT: 150PX;">
+      </div> -->
+      <div  fxLayout="row"  class="dashcard mat-elevation-z4 "   >
+       <div fxFlex="40"fxLayout="column" fxLayoutAlign="center center" >
+        <div>
+          <div *ngIf="dash.title== 'New Request'">
+            <mat-icon  class="cardIcon" class="NewRequest-status"> 
+              <!-- <mat-progress-spinner mode="determinate" value='{{ dash.number }}' diameter="68"></mat-progress-spinner> -->
+              <mat-progress-spinner strokeWidth="4" mode="determinate" value='90' diameter="68"></mat-progress-spinner>
+            </mat-icon>
+            <img src='./../../../../assets/images/Sidemenu_icon/SpinnerArrowOrange.png' style="margin-left: -15px;padding-bottom: 22px;">
+          </div>
+          <div *ngIf="dash.title== 'In Progress'">
+            <mat-icon  class="cardIcon" class="InProgress-status"> 
+              <mat-progress-spinner strokeWidth="4" mode="determinate" value='80' diameter="68"></mat-progress-spinner>
+            </mat-icon>
+            <img src='./../../../../assets/images/Sidemenu_icon/SpinnerArrowBlue.png' style="margin-left: -15px;padding-bottom: 22px;">
+          </div>
+          <div *ngIf="dash.title== 'Completed'">
+            <mat-icon  class="cardIcon" class="Completed-status"> 
+              <mat-progress-spinner strokeWidth="4" mode="determinate" value='66' diameter="68"></mat-progress-spinner>
+            </mat-icon>
+            <img src='./../../../../assets/images/Sidemenu_icon/SpinnerArrowGreen.png' style="margin-left: -15px;padding-bottom: 22px;">
+          </div>
+          <div *ngIf="dash.title== 'Cancelled'">
+            <mat-icon  class="cardIcon" class="Cancelled-status"> 
+              <mat-progress-spinner strokeWidth="4" mode="determinate" value='56' diameter="68"></mat-progress-spinner>
+            </mat-icon>
+            <img src='./../../../../assets/images/Sidemenu_icon/SpinnerArrowRed.png' style="margin-left: -15px;padding-bottom: 22px;">
+          </div>
+        </div>
+      </div>
+      <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center" >
+            <div style="color: #8A92A6;">
+              {{ dash.title }}
+          </div>
+          
+          <div *ngIf="dash.title== 'New Request'">
+            <p class="mat-body-1 border-top" style="color: #ED8F2D;">
+              {{ dash.number }}
+            </p>
+          </div>
+          <div *ngIf="dash.title== 'In Progress'">
+            <p class="mat-body-1 border-top" style="color: #6BB5EA;">
+              {{ dash.number }}
+            </p>
+          </div>
+          <div *ngIf="dash.title== 'Completed'">
+            <p class="mat-body-1 border-top" style="color: #18D184;">
+              {{ dash.number }}
+            </p>
+          </div>
+          <div *ngIf="dash.title== 'Cancelled'">
+            <p class="mat-body-1 border-top" style="color: #C8281E;">
+              {{ dash.number }}
+            </p>
           </div>
       </div>
+   </div>
   </div>
+  
 </div>
 
 <!-- <app-user-list></app-user-list> -->
@@ -59,6 +119,3 @@
      </div>
   </div>
 </div> -->
-
-
-

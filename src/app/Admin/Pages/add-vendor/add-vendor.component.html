@@ -51,7 +51,7 @@
                     <div class="form-group col">
                         <label>Estd Date</label>
                         <input type="date" formControlName="vendorEstDate" class="form-control"  max={{latest_date}}
-                        style="font-family: Roboto,Helvetica Neue, sans-serif;" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['vendorEstDate']?.errors }" >
+                        style="font-family: Roboto;" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['vendorEstDate']?.errors }" >
                          <div *ngIf="submitted && registerForm.controls['vendorEstDate']?.errors" class="invalid-feedback">
                             <div *ngIf="registerForm.controls['vendorEstDate']?.errors?.['required']">Vendor EstDate is required</div>
                             <div *ngIf="registerForm.controls['vendorEstDate']?.errors?.['min']">Vendor EstDate is required</div>

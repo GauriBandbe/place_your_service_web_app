@@ -59,7 +59,8 @@ export class UserMenuComponent implements OnInit {
 		  .subscribe(response => {
 			console.log(response);			  
 			this.ProfileRole=response.userTypeDescription;
-			this.ProfileName=response.email;
+			this.ProfileName=response.firstName +" "+response.lastName ;
+			//this.ProfileName=response.email;
 		  })
 		  //const decrypt = this.jwtHelper.decodeToken(token) ;	
 		  

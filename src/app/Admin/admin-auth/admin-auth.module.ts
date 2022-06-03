@@ -22,6 +22,7 @@ import { AddVendorComponent } from '../Pages/add-vendor/add-vendor.component';
 import { VendorListComponent } from '../Pages/vendor-list/vendor-list.component';
 import { AddVendorUserComponent } from '../Pages/add-vendor-user/add-vendor-user.component';
 import { VendorUserListComponent } from '../Pages/vendor-user-list/vendor-user-list.component';
+import { VendorServicesComponent } from '../Pages/vendor-services/vendor-services.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { VendorUserListComponent } from '../Pages/vendor-user-list/vendor-user-l
     VendorListComponent,
     AddVendorComponent,
     AddVendorUserComponent,
-    VendorUserListComponent
+    VendorUserListComponent,
+    VendorServicesComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,6 @@ import { VendorUserListComponent } from '../Pages/vendor-user-list/vendor-user-l
     DiagnosisDataComponent, MedicationDataComponent, AllergyDataComponent, ProcedureDataComponent,
     AllergyComponent, DiagnosisComponent, MedicationComponent, ProcedureComponent,
     TechnicianListComponent,AddTechnicianComponent,VendorListComponent,AddVendorComponent,
-    AddVendorUserComponent,VendorUserListComponent]
+    AddVendorUserComponent,VendorUserListComponent,VendorServicesComponent]
 })
 export class AdminAuthModule { }

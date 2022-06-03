@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @NgModule({
-  declarations: [ ],
+  declarations: [   
+  ],
   imports: [
     CommonModule,
     AdminSharedModule,

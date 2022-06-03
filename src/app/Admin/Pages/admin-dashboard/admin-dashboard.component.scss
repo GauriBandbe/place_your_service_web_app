@@ -13,15 +13,16 @@
 @mixin dashcard($theme) {
 
   .dashcard {
-      margin: 10px 5px;
+      margin: 10px 18px;
       height: 100px;
-      background-color:white;
+      background-color:white;border-radius: 10px
   }
   .mat-icon {
       @include mat-icon(40px);
   }
   .border-top {
-      border-top: 1px solid white;
+      border-top: 10px solid white;
+      font-weight: 500
   }
   .mat-headline {
       @include mat-headline();
@@ -75,3 +76,15 @@ cursor: default;
   border-top-right-radius: inherit;
 }
 
+.NewRequest-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #ED8F2D;
+}
+.InProgress-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #6BB5EA;
+}
+.Completed-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #18D184;
+}
+.Cancelled-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #C8281E;
+}

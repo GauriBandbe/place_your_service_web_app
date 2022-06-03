@@ -8,3 +8,18 @@
 <div class="progress">
   <div class="progress-bar" role="progressbar" [style.width.%]="progress"></div>
 </div>
+
+
+<input type="text" (keyup)="getUserIdsFirstWay($event)" id="userIdFirstWay" list="dynmicUserIds" />
+      <datalist id="dynmicUserIds">
+        <option *ngFor="let item of userList1" [value]="item.key">{{item.value}}</option>
+        <!-- <option *ngFor="let car of pincode" [value]="car.key" >{{car.viewValue}}</option> -->
+      </datalist>
+      <select (keyup)="getUserIdsFirstWay($event)" class="form-control">
+        <option *ngFor="let item of userList1" [value]="item.key">{{item.value}}</option>
+    </select>
+      <ng-select [virtualScroll]="false" [multiple]="false"  
+      (keyup)="getUserIdsFirstWay($event)" #ngSelect> 
+          <ng-option *ngFor="let car of pincode" [value]="car.key" >{{car.viewValue}}</ng-option>
+
+      </ng-select>

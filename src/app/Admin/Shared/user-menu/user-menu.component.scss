@@ -1,3 +1,6 @@
+body, html {
+  font-family: 'Roboto';
+}
 :host {
   height: 100%;
 }
@@ -10,7 +13,7 @@
         display: flex;
         justify-content: left;
         height: 100%;
-        min-width: 160px;
+        min-width: 200px;
 
     .avatar {
         width: 30px;
@@ -19,7 +22,7 @@
     }
 
     .name {
-        margin:14px 8px 14px 10px;
+        margin:9px 8px 14px 10px;
     }
 
     .icon {
@@ -71,6 +74,7 @@
   top: 20px;
   right: 80px;
   color: white;
+ 
 }
 .content-dropdown{
   width: 150px !important;

@@ -90,7 +90,7 @@
                             <div class="form-group col">
                                 <label>Date of Birth</label>
                                 <input type="date" formControlName="date_of_Birth" class="form-control"  max={{latest_date}}
-                                style="font-family: Roboto,Helvetica Neue, sans-serif;" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['date_of_Birth']?.errors }" >
+                                style="font-family: Roboto;" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['date_of_Birth']?.errors }" >
                                  <div *ngIf="submitted && registerForm.controls['date_of_Birth']?.errors" class="invalid-feedback">
                                     <div *ngIf="registerForm.controls['date_of_Birth']?.errors?.['required']">Date of Birth is required</div>
                                     <div *ngIf="registerForm.controls['date_of_Birth']?.errors?.['min']">Date of Birth is required</div>

@@ -48,9 +48,9 @@ export class AdminDashboardComponent implements OnInit {
     // })
   }
   public dashCard = [
-    { colorDark: '#5C6BC0', colorLight: '#7986CB', number: 5, title: 'Patient', icon: 'face icon' },
-    { colorDark: '#42A5F5', colorLight: '#64B5F6', number: 4, title: 'Physician', icon: 'person' },
-    { colorDark: '#26A69A', colorLight: '#4DB6AC', number: 3, title: 'Nurse', icon: 'person' },
-    { colorDark: '#66BB6A', colorLight: '#81C784', number: 12, title: 'Total', icon: 'people' }
+    { colorDark: 'NewRequest', colorLight: '#7986CB', number: 20, title: 'New Request', icon: './../../../../assets/images/Sidemenu_icon/Box1.png' },
+    { colorDark: '#6BB5EA', colorLight: '#64B5F6', number: 14, title: 'In Progress', icon: './../../../../assets/images/Sidemenu_icon/Box2.png' },
+    { colorDark: '#18D184', colorLight: '#4DB6AC', number: 5, title: 'Completed', icon: './../../../../assets/images/Sidemenu_icon/Box3.png' },
+    { colorDark: '#C8281E', colorLight: '#81C784', number: 1, title: 'Cancelled', icon: './../../../../assets/images/Sidemenu_icon/Box4.png' }
 ];
 }

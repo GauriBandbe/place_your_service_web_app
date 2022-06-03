@@ -1,0 +1,110 @@
+<mat-progress-bar *ngIf="loginstarts"  mode="indeterminate"></mat-progress-bar>
+<html class="isEmbedded ">
+<body>
+    <mat-card-title>
+        <div class="title-section" style="margin-top: 2%;margin-left: 3%;">
+          <mat-icon class="maticon" style="font-weight: 500;" routerLink="/Admin/Dashboard">arrow_back</mat-icon>  
+          <span class="form-title" style="color:#ED8F2D !important;font-weight: 500; font-family: Roboto;
+          margin-left: 2%;line-height: 175%;font-size: smaller;">Vendor Services & Pin Codes</span>
+          <span class="name role-name" fxHide fxShow.gt-xs></span>
+          
+        </div>  
+        
+      </mat-card-title>   
+
+      
+    <div class="card m-3 mat-elevation-z8">
+         <div class="card-body">
+            <form [formGroup]="registerForm" >                       
+                <div class="form-row">                         
+                    <div class="form-group col" >
+                        <label >Vendor</label>
+                        <select formControlName="vendor" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['vendor']?.errors }">
+                            <option [value]="option.value" *ngFor="let option of vendor">{{ option.viewValue }}</option>
+                            
+                        </select>
+                        <div *ngIf="submitted && registerForm.controls['vendor']?.errors" class="invalid-feedback">
+                            <div *ngIf="registerForm.controls['vendor']?.errors?.['required']">vendor is required</div>
+                        </div>
+                    </div>  
+                    <div class="form-group col">
+                        <label style="margin-bottom: 5px;">Type of Services(s)</label><br>
+                        <mat-form-field appearance="outline" style="width: 100%;background-color: white;font-size: 10.5px;padding-top: 0%;" >
+                            
+                            <mat-select [formControl]="typeofServices"  multiple [(value)]="selectedService" >
+                            <mat-select-trigger>
+                                {{typeofServices.value ? typeofServices.value[0] : ''}}
+                                <span *ngIf="typeofServices.value?.length > 1" class="example-additional-selection">
+                                (+{{typeofServices.value.length - 1}} {{typeofServices.value?.length === 2 ? 'other' : 'others'}})
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let typeOfServices of typeofServiceList" [value]="typeOfServices.viewValue" >{{typeOfServices.viewValue}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="submitted && registerForm.controls['typeOfService']?.errors" class="invalid-feedback">
+                            <div *ngIf="registerForm.controls['typeOfService']?.errors?.['required']">Type of Work is required</div>
+                        </div>
+                    </div>   
+                    <div class="form-group col">
+                        <label>Pin Code</label>
+                        <input type="text" class="form-control" multiple (keyup)="getUserIdsFirstWay($event)" id="userIdFirstWay" list="dynmicUserIds" />
+                        <datalist id="dynmicUserIds" (change)="getAllAddressValue($event)">
+                            <option *ngFor="let item of userList1" [value]="item.description">{{item.value}}</option>
+                        </datalist>
+                        <div *ngIf="submitted && registerForm.controls['pinCode']?.errors" class="invalid-feedback">
+                        <div *ngIf="registerForm.controls['pinCode']?.errors?.['required']">Pin Code is required</div>
+                        </div>
+                    </div> 
+                  
+                </div>
+                <div class="form-row">                         
+                    <div class="form-group col" >
+                        <div class="row" >
+                            <table id="Proctable" class="table_wrapper table table-bordered table-striped Proctable-sm">
+                                <thead>
+                                <tr>
+                                    
+                                    <th style="width: 18%;padding: 8px;color: #5c6873;font-weight: 400;">Pin Code</th>
+                                    <th style="padding:8px;color: #5c6873;font-weight: 400;">Address</th>
+                                    <th style="width: 5%;padding:8px;color: #5c6873;font-weight: 400;">Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let Pitem of PincodeTableList">
+                                        
+                                        <td>{{Pitem.value}}</td>
+                                        <td>{{Pitem.descriptionM}}</td>
+                                        <td>
+                                            <button mat-icon-button>
+                                                <mat-icon style="color:red;font-size: 22px;" (click)="Remove_PincodeData(Pitem.key)" > delete</mat-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                                     
+                <div style="text-align: right!important;">
+                    <button style="background-color: #ED8F2D;color: #fff;border: 1px solid transparent;margin-right: 0.25rem!important;
+                    border: 1px solid transparent;
+                    padding: 0.375rem 0.75rem;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    border-radius: 0.25rem;" (click)="onSubmit()">Submit</button>
+                    <!-- <button style="background-color:red;color: #fff;border: 1px solid transparent;
+                    border: 1px solid transparent;
+                    padding: 0.375rem 0.75rem;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    border-radius: 0.25rem;" type="reset" (click)="onReset()">Clear</button> -->
+                </div>
+                
+            </form>
+        </div>
+    </div> 
+</body>
+
+</html>

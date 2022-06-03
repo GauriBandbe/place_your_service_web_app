@@ -6,22 +6,35 @@
 
 .mat-list-item-content {
     transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    cursor: default;
-  
+    cursor: pointer;
+    
     &:hover {
-    //   transform: translate(0, -8px);
-    background-color: #ED8F2D;
+      background-color: #ED8F2D;
+      color: white;
       box-shadow: 0 20px 20px rgba(0, 0, 0, .16)
     }
-    &::selection {
-        background-color: red;
-      }
+    
   }
-  .a :active{
-    // transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    // cursor: default;
-    &::content {
-        background-color: red;
-      }
+  .mat-nav-list .mat-list-item:focus,
+  .mat-action-list .mat-list-item:focus,
+  .mat-list-option:focus {
+    background: #ED8F2D !important;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+  }
+//   .is-active {
+//     background: #ED8F2D !important;
+//     color: white;
+//     font-size: 15px;
+//     font-weight: 500;
+// }
+  // .mat-list-text {
    
-  }
+  //   cursor: pointer;
+    
+  //   &:hover {
+  //     color: white;
+     
+  //   }
+  // }
