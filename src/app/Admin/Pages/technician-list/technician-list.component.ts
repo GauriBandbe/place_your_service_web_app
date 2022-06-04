@@ -81,7 +81,7 @@ export class TechnicianListComponent implements OnInit {
 }
     
     this.http.post<any>(GlobalConstants.apiURL+'/Technician/GetTechnician' 
-    ,({"hasFilters" :this.hasFilters,"usePaging":true,"pageSize":100,"currentIndex":1,"userCodeList":[0],"vendorCodeList":[this.vendorCodet]})
+    ,({"hasFilters" :this.hasFilters,"usePaging":true,"pageSize":1000,"currentIndex":1,"userCodeList":[0],"vendorCodeList":[this.vendorCodet]})
     ,{ headers: reqHeader })
     .subscribe(data => {
     //  })

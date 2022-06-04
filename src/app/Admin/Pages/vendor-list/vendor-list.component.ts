@@ -85,7 +85,7 @@ export class VendorListComponent implements OnInit {
     var userCode = Number(localStorage.getItem("userCode"));
     console.log(userCode);
     this.http.post<any>(GlobalConstants.apiURL+'/Vendor/GetVendor' 
-    ,({"hasFilters" :false,"usePaging":true,"pageSize":this.pageSize,"currentIndex":this.pageIndex,"vendorCodeList":[0],"vendorGSTList":[""]})
+    ,({"hasFilters" :false,"usePaging":true,"pageSize":1000,"currentIndex":1,"vendorCodeList":[0],"vendorGSTList":[""]})
     ,{ headers: reqHeader })
     .subscribe(data => {
       console.log(data);

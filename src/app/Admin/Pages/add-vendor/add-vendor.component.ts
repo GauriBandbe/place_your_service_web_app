@@ -184,11 +184,12 @@ onSubmit() {
  {
 
    if(data.isAddSuccess==true){
+     
        Swal.fire({
            text: data.message,
            icon: 'success'
-         });
-         this.router.navigate(['/Admin/VendorList']);
+         }).then(() => {
+          this.router.navigate(['/Admin/VendorList']);
 
          const Toast = Swal.mixin({
           toast: true,
@@ -206,6 +207,8 @@ onSubmit() {
           icon: 'success',
           title: Vname +" "+data.message
         })
+      });
+         setTimeout(() => {}, 1000);
    }
    else{
        Swal.fire({

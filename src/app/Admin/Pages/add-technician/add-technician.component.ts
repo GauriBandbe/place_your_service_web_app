@@ -497,27 +497,34 @@ if(this.usert==1){
   {
     console.log(data);
     if(data.isAddSuccess==true){
-        Swal.fire({
-            text: data.message+ " User code: "+  data.userCode +" and Password is: "+  data.password,
-            icon: 'success'
-          });
-          this.router.navigate(['/Admin/TechnicianList']);
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 9000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-          
-          Toast.fire({
-            icon: 'success',
-            title: Vname +" "+data.message
-          })
+      Swal.fire({
+        text: data.message+ " User code: "+  data.userCode +" and Password is: "+  data.password,
+        icon: 'success'
+      }).then(() => {
+        this.router.navigate(['/Admin/TechnicianList']);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 9000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: Vname +" "+data.message
+        })
+    });
+
+      
+      setTimeout(() => { }, 1000);
+
+        
+        
         
     }
     else{
