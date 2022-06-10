@@ -45,14 +45,14 @@ export const menus = [
     {
         'name': 'Service Request',
         'icon': 'Service_Icon',
-        'link': 'Dashboard',
+        'link': 'ServiceRequest',
         'open': false,
         'chip': false,
     },
     {
         'name': 'Service History',
         'icon': 'Service_Icon',
-        'link': 'Dashboard',
+        'link': 'ServiceHistory',
         'open': false,
         'chip': false,
         // 'sub': [
@@ -95,14 +95,14 @@ export const Vendormenus = [
     {
         'name': 'Service Request',
         'icon': 'Service_Icon',
-        'link': 'Dashboard',
+        'link': 'ServiceRequest',
         'open': false,
         'chip': false,
     },
     {
         'name': 'Service History',
         'icon': 'Service_Icon',
-        'link': 'Dashboard',
+        'link': 'ServiceHistory',
         'open': false,
         'chip': false,      
     },

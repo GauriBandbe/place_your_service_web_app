@@ -121,18 +121,20 @@ export class AddTechnicianComponent  implements OnInit {
     selectedFile : File;
     //For getting Profile file
     onUploadProfileFile(event: any) {
-
+      if(event.target.value==""){
+        return;
+      }
        var filePath = event.target.value; 
        console.log(filePath);
        this.file = event.target.files[0];
    
       if(!event.target.files[0] || event.target.files[0].length == 0) {
-        this.msg = 'You must select an image';
-        Swal.fire({
-          text: this.msg,
-          icon: 'error'
-        });
-        return;
+        // this.msg = 'You must select an image';
+        // Swal.fire({
+        //   text: this.msg,
+        //   icon: 'error'
+        // });
+        // return;
       }
       
       var mimeType = event.target.files[0].type;
@@ -180,13 +182,16 @@ export class AddTechnicianComponent  implements OnInit {
 
      //For getting Adhar front file
     onUploadAdharFrontFile(event: any) {
-      if(!event.target.files[0] || event.target.files[0].length == 0) {
-        this.msg2 = 'You must select an image';
-        Swal.fire({
-          text: this.msg2,
-          icon: 'error'
-        });
+      if(event.target.value==""){
         return;
+        }
+      if(!event.target.files[0] || event.target.files[0].length == 0) {
+        // this.msg2 = 'You must select an image';
+        // Swal.fire({
+        //   text: this.msg2,
+        //   icon: 'error'
+        // });
+        // return;
       }
       
       var mimeType = event.target.files[0].type;
@@ -216,13 +221,16 @@ export class AddTechnicianComponent  implements OnInit {
     
     //For getting Adhar Back file
     onUploadAdharBackFile(event: any) {
+      if(event.target.value==""){
+       return;
+      }
       if(!event.target.files[0] || event.target.files[0].length == 0) {
-        this.msg3 = 'You must select an image';
-        Swal.fire({
-          text: this.msg3,
-          icon: 'error'
-        });
-        return;
+        // this.msg3 = 'You must select an image';
+        // Swal.fire({
+        //   text: this.msg3,
+        //   icon: 'error'
+        // });
+        // return;
       }
       
       var mimeType = event.target.files[0].type;
@@ -299,16 +307,16 @@ for(var i=0; i<response.length;i++){
 })
 
 }
-
-    //For get Type of work Dropdown
-    gettypeofWorkvalue(event: any) {
-      // = (event.target as HTMLSelectElement).value;
-     //console.log(event.source.value);
-      console.log(event);
-      // const num =event;
-      // console.log(this.toppingList[num].name);
-      
-    }    
+//For get Type of work Dropdown
+gettypeofWorkvalue(event: any) {
+  // = (event.target as HTMLSelectElement).value;
+ //console.log(event.source.value);
+  console.log(event);
+  // const num =event;
+  // console.log(this.toppingList[num].name);
+  
+}   
+     
   
 
 //For get Vendor List
@@ -402,7 +410,7 @@ onSubmit() {
  if(this.typeofTechQualificationList2.length >0){
   for(var i=0; i<this.typeofTechQualificationList2.length;i++){
     let index  = this.typeofTechQualificationList.findIndex(item => item.viewValue == this.typeofTechQualificationList2[i].viewValue);
-    if(index>0){
+    if(index>-1){
       this.typeofTechQualificationListM.push(this.typeofTechQualificationList[index].value) 
     }   
   }
@@ -432,7 +440,7 @@ onSubmit() {
  if(this.typeofWorkList2.length >0){
   for(var i=0; i<this.typeofWorkList2.length;i++){
     let index  = this.typeofWorkList.findIndex(item => item.viewValue == this.typeofWorkList2[i].viewValue);
-    if(index>0){
+    if(index>-1){
       this.typeofWorkListM.push(this.typeofWorkList[index].value)     
     }   
   }
@@ -486,7 +494,7 @@ if(this.usert==1){
    "workTypeCodeList": this.typeofWorkListM,
    "qualificationCodeList": this.typeofTechQualificationListM,
    "postalAddress":  this.registerForm.value.Address + " " + this.registerForm.value.Address2 + " " + this.registerForm.value.landmark +" "
-   + " "+ this.registerForm.value.city +" " + this.registerForm.value.district+ " " + this.registerForm.value.state,
+   + " "+ this.registerForm.value.City +" " + this.registerForm.value.district+ " " + this.registerForm.value.state,
    "addressZipCode": this.registerForm.value.pinCode_key,
    "addressLine_1": this.registerForm.value.Address,
    "addressLine_2": this.registerForm.value.Address2,
@@ -710,7 +718,7 @@ onReset() {
   return matches;
 };
  getPincodeList(value : any) {
-  //this.pincodeMaster=[];
+  this.pincodeMaster=[];
    const token = localStorage.getItem("jwt") as string;
       
            var reqHeader = new HttpHeaders({ 
@@ -744,13 +752,11 @@ onReset() {
     alert(this.selectedLevel.name)
   }
   getAllAddressValue(userIdkey: any){
-    console.log("keysss")
-    console.log(userIdkey)
-    let index  = this.pincodeMaster.findIndex(item => item.description == userIdkey);
-    if(index>0){
-      this.registerForm.get("district")?.setValue(this.pincodeMaster[index].district);
-      this.registerForm.get("state")?.setValue(this.pincodeMaster[index].state);
-      this.registerForm.get("pinCode_key")?.setValue(this.pincodeMaster[index].key);
+    let index  = this.userData.findIndex(item => item.description == userIdkey);
+    if(index>-1){
+      this.registerForm.get("district")?.setValue(this.userData[index].district);
+      this.registerForm.get("state")?.setValue(this.userData[index].state);
+      this.registerForm.get("pinCode_key")?.setValue(this.userData[index].key);
     } 
   }
 }

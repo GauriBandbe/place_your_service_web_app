@@ -13,7 +13,7 @@
     
     <div *ngIf="usert != 2;">
     <app-sidemenu-item  *ngFor="let menu of menus" 
-    [menu]="menu" 
+    [menu]="menu" [iconOnly]="iconOnly"
     > </app-sidemenu-item>
    </div> 
    <div *ngIf="usert == 2;">

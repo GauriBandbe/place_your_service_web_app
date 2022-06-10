@@ -24,6 +24,17 @@ interface Bloodgroup{
 interface Tservise {
   //id: number;
 }
+interface Pincodedrodown{
+  key: string;
+  viewValue: string;
+}
+interface Pincode{
+  district :string;
+  state :string;
+  key :number;
+  value: string;
+  description: string;
+}
 @Component({
   selector: 'app-add-vendor-user',
   templateUrl: './add-vendor-user.component.html',
@@ -49,7 +60,10 @@ export class AddVendorUserComponent implements OnInit {
     latest_date =this.datepipe.transform(this.todayDate, 'yyyy-MM-dd');
 
     ngOnInit() {
+      if(this.usert==1){
         this.getVendorList();
+      }
+        
         this.getBloodgroupList();
         this.gettypeofWorkList();
         this.gettypeofTechQualificationList();
@@ -76,7 +90,8 @@ export class AddVendorUserComponent implements OnInit {
             state: ['', Validators.required],
             country: ['', Validators.required],
             district: ['', Validators.required],
-            zipCode: ['', Validators.required],
+            pinCode: [''],
+            pinCode_key: [''],
             landmark: ['', Validators.required],
             //technicalQualification: ['', Validators.required],
             workExperience: ['', Validators.required],
@@ -158,12 +173,6 @@ export class AddVendorUserComponent implements OnInit {
       // ********************End For Upload file
     }
 
-    // public delete(){
-    //   this.url = null;
-    // }
-    //End For profile Image
-
-     //For getting Adhar front file
     onUploadAdharFrontFile(event: any) {
       if(!event.target.files[0] || event.target.files[0].length == 0) {
         this.msg2 = 'You must select an image';
@@ -235,9 +244,6 @@ export class AddVendorUserComponent implements OnInit {
       }
     }
    
-
-  
-
 //For Type of Work
 typeofWorkList :TypeofWork[]= [];
 typeofWorkList2 :TypeofWork[] = [];
@@ -285,15 +291,15 @@ for(var i=0; i<response.length;i++){
 
 }
 
-    //For get Type of work Dropdown
-    gettypeofWorkvalue(event: any) {
-      // = (event.target as HTMLSelectElement).value;
-     //console.log(event.source.value);
-      console.log(event);
-      // const num =event;
-      // console.log(this.toppingList[num].name);
-      
-    }    
+//For get Type of work Dropdown
+gettypeofWorkvalue(event: any) {
+  // = (event.target as HTMLSelectElement).value;
+ //console.log(event.source.value);
+  console.log(event);
+  // const num =event;
+  // console.log(this.toppingList[num].name);
+  
+}        
   
 
 //For get Vendor List
@@ -338,6 +344,7 @@ getBloodgroupList(){
   })
 }
 
+
 //For Add Technician
 typeofWorkListM : Tservise[] = [];
 typeofTechQualificationListM : Tservise[] = [];
@@ -366,11 +373,19 @@ onSubmit() {
   this.registerForm.value.uidaI_Aadhar =String(this.registerForm.value.uidaI_Aadhar);
   this.registerForm.value.titleCode = 1;
   this.registerForm.value.bloodGroup_Code = Number(this.registerForm.value.bloodGroup_Code);
+  this.registerForm.value.pinCode_key = Number(this.registerForm.value.pinCode_key);
   // stop here if form is invalid
   //
   
   if (this.registerForm.invalid) {
       return;
+  }
+  if(this.registerForm.value.pinCode_key==""){
+    Swal.fire({
+      text: "Please select pincode.",
+      icon: 'error'
+    });
+    return;
   }
  //For TechQualification
  if(this.typeofTechQualifications.value != null){
@@ -391,7 +406,7 @@ onSubmit() {
  if(this.typeofTechQualificationList2.length >0){
   for(var i=0; i<this.typeofTechQualificationList2.length;i++){
     let index  = this.typeofTechQualificationList.findIndex(item => item.viewValue == this.typeofTechQualificationList2[i].viewValue);
-    if(index>0){
+    if(index>-1){
       this.typeofTechQualificationListM.push(this.typeofTechQualificationList[index].value) 
     }   
   }
@@ -421,7 +436,7 @@ onSubmit() {
  if(this.typeofWorkList2.length >0){
   for(var i=0; i<this.typeofWorkList2.length;i++){
     let index  = this.typeofWorkList.findIndex(item => item.viewValue == this.typeofWorkList2[i].viewValue);
-    if(index>0){
+    if(index>-1){
       this.typeofWorkListM.push(this.typeofWorkList[index].value)     
     }   
   }
@@ -464,8 +479,12 @@ onSubmit() {
    //"workTypeCodeList": this.typeofWorkListM,
   // "qualificationCodeList": this.typeofTechQualificationListM,
    "postalAddress":  this.registerForm.value.Address + " " + this.registerForm.value.Address2 + " " + this.registerForm.value.landmark +" "
-   + this.registerForm.value.zipCode +" "+ this.registerForm.value.city +" " + this.registerForm.value.district+ " " + this.registerForm.value.state+ " " + this.registerForm.value.country
-   }),{ headers: reqHeader })
+   + this.registerForm.value.pinCode +" "+ this.registerForm.value.City +" " + this.registerForm.value.district+ " " + this.registerForm.value.state+ " " + this.registerForm.value.country,
+    "addressZipCode": this.registerForm.value.pinCode_key,
+    "addressLine_1":  this.registerForm.value.Address,
+    "addressLine_2":  this.registerForm.value.Address2,
+    "addressLandMark": this.registerForm.value.landmark
+  }),{ headers: reqHeader })
   //this.act.CreateTechnicianUser(this.registerForm.value)
   .subscribe((data)=> 
   {
@@ -530,4 +549,109 @@ onReset() {
 }
 //End For Add Technician
 
+//For Pincode
+pincodes: string[];
+pincode: Pincodedrodown[] = [];
+pincodeMaster: Pincode[] = [];
+userList1: Pincode[] = [];
+userData: Pincode[] = [];
+userDatakey: Pincode[] = [];
+
+lastkeydown1: number = 0;
+subscription: any;
+zipcontrol = new FormControl;
+getUserIdsFirstWay($event : any) {
+  let userId = (<HTMLInputElement>document.getElementById('userIdFirstWay')).value;
+
+  console.log("userId2")
+  console.log(userId)
+  this.userList1 = [];
+
+  if (userId.length >= 5) {
+    if ($event.timeStamp - this.lastkeydown1 > 200) {
+      this.getPincodeList(userId)
+      this.userList1 = this.searchFromArray(this.userData, userId);
+         
+   }
+   if(this.userList1.length==0 && userId.length >= 8){
+     console.log( "userList1");
+     this.userDatakey = this.searchkeyFromArray(this.pincodeMaster, userId);
+     console.log( this.userDatakey );
+     this.getAllAddressValue(userId);
+   }
+    
+  }
+}  
+
+searchFromArray(arr : any, regex : any) {
+  console.log("arr"); console.log(arr);
+  //let matches = [], i;
+  let matches = [], i;
+  
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i].value.match(regex)) {
+      matches.push(arr[i]);
+    }
+  }
+  //matches.pop();
+  console.log( "matches");
+  console.log( regex);
+  console.log( matches);
+  return matches;
+};
+
+searchkeyFromArray(arr : any, regex : any) {
+ console.log("arr"); console.log(arr);
+ //let matches = [], i;
+ let matches = [], i;
+ 
+ for (i = 0; i < arr.length; i++) {
+   if (arr[i].value.match(regex)) {
+     matches.push(arr[i]);
+   }
+ }
+ //matches.pop();
+ console.log( "matches");
+ console.log( regex);
+ console.log( matches);
+ return matches;
+};
+getPincodeList(value : any) {
+ this.pincodeMaster=[];
+  const token = localStorage.getItem("jwt") as string;
+     
+          var reqHeader = new HttpHeaders({ 
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ token
+        });
+ 
+  this.http.get<any>(GlobalConstants.apiURL+'/MasterData/SearchPincode'+ `?pincode=` + value,{headers: reqHeader} )
+  .subscribe(response => {
+    
+    
+    // for(var i=0; i<response.length;i++){
+    //   var pinL={ key :response[i].key ,viewValue : response[i].description } ;      
+    //   this.pincode.push(pinL);
+    //   this.pincodes = response[i].description;
+    //   this.userList1 = response[i].description;
+    // }
+    for(var i=0; i<response.length;i++){
+      var pinL2={ district :response[i].district ,state :response[i].state ,key :response[i].key ,value :response[i].value ,description : response[i].value +"-"+response[i].description } ;      
+      this.pincodeMaster.push(pinL2)
+    }
+ 
+  Object.assign(this.userData, this.pincodeMaster);
+ 
+   })
+
+  //return this.http.get('/src/app/data/users.json', { headers });
+ }
+ getAllAddressValue(userIdkey: any){
+  let index  = this.userData.findIndex(item => item.description == userIdkey);
+  if(index>-1){
+    this.registerForm.get("district")?.setValue(this.userData[index].district);
+    this.registerForm.get("state")?.setValue(this.userData[index].state);
+    this.registerForm.get("pinCode_key")?.setValue(this.userData[index].key);
+  } 
+}
 }

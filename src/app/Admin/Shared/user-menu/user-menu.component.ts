@@ -20,7 +20,7 @@ export class UserMenuComponent implements OnInit {
 	Username :string = '';
 	ProfileName:string="";
 	ProfileRole:string="";
-		
+	public usert = Number(localStorage.getItem("userTypeCode"));
   
 		@Input() currentUser = null;
 		@HostListener('document:click', ['$event', '$event.target'])

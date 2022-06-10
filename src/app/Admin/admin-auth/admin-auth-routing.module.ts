@@ -32,6 +32,8 @@ const routes: Routes = [
       { path: 'VendorUserList', component: VendorUserListComponent },
       { path: 'CreateVendorUser', component: AddVendorUserComponent },      
       { path: 'VendorServices', component: VendorServicesComponent },      
+      { path: 'ServiceRequest', component: AdminDashboardComponent },      
+      { path: 'ServiceHistory', component: AdminDashboardComponent },      
     ]
 }
 ];

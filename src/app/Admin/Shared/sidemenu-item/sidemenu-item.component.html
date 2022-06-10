@@ -2,7 +2,7 @@
               [ngClass]="{'secondaryMenu': secondaryMenu, 'primary': !secondaryMenu}">
   <mat-list-item [routerLinkActive]="['is-active']" *ngIf='menu.link==false' (click)='menu.open = !menu.open'>
     <mat-icon matListIcon  iconsmall svgIcon={{menu.icon}} ></mat-icon>
-    <h3 matLine *ngIf='!iconOnly' >{{ menu.name }} </h3>
+    <h3 [routerLinkActive]="['is-active']" matLine *ngIf='!iconOnly' >{{ menu.name }} </h3>
     <mat-icon class="icon" fxHide fxShow.gt-xs style="color: white;">keyboard_arrow_right</mat-icon>
     <mat-chip-list *ngIf='menu?.chip && !iconOnly'>
       <mat-chip>{{menu?.chip?.value}} </mat-chip>
@@ -14,7 +14,7 @@
 
   <mat-list-item [routerLinkActive]="['is-active']" *ngIf='menu.link!=false' (click)='menu.open = !menu.open' [routerLink]='[menu.link]'> 
     <mat-icon  matListIcon iconsmall svgIcon={{menu.icon}}></mat-icon>
-    <h3 matLine *ngIf='!iconOnly' >{{ menu.name }} </h3>
+    <h3 matLine *ngIf='!iconOnly' [routerLinkActive]="['is-active']">{{ menu.name }} </h3>
     <mat-icon class="icon" fxHide fxShow.gt-xs style="color: white;">keyboard_arrow_right</mat-icon>
   </mat-list-item>
 

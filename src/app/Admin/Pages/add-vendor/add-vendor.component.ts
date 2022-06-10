@@ -134,7 +134,7 @@ onSubmit() {
  if(this.typeofServiceList2.length >0){
   for(var i=0; i<this.typeofServiceList2.length;i++){
     let index  = this.typeofServiceList.findIndex(item => item.viewValue == this.typeofServiceList2[i].viewValue);
-    if(index>0){
+    if(index>-1){
       //var Tservise1={  } ; 
       this.typeofServiceListM.push(this.typeofServiceList[index].value)     
       //this.typeofServiceListM += this.typeofServiceList[index].value +",";

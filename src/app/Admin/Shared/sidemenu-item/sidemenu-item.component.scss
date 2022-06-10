@@ -42,4 +42,27 @@
 
 
 }
-
+ .mat-list-base .mat-list-item {
+         color: #8A92A6; 
+        
+    }
+.mat-list-item-content {
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #ED8F2D;
+      color: white;
+      box-shadow: 0 20px 20px rgba(0, 0, 0, .16)
+    }
+    
+  }
+.is-active {
+    background: #ED8F2D !important;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    .mat-nav-list .mat-list-item {
+        color: white;
+    }
+}

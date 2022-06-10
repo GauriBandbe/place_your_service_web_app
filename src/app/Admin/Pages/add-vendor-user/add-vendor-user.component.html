@@ -3,7 +3,7 @@
 <body>
     <mat-card-title>
         <div class="title-section" style="margin-top: 2%;margin-left: 3%;">
-          <mat-icon class="maticon" style="font-weight: 500;" routerLink="/Admin/VendorUserList">arrow_back</mat-icon>  
+          <mat-icon class="maticon" style="font-weight: 500;color: #8A92A6;" routerLink="/Admin/VendorUserList">arrow_back</mat-icon>  
           <span class="form-title" style="color:#ED8F2D !important;font-weight: 500; font-family: Roboto;
           margin-left: 2%;line-height: 175%;font-size: smaller;"> Add Vendor User</span>
           <span class="name role-name" fxHide fxShow.gt-xs></span>
@@ -129,7 +129,41 @@
                                 </div>
                             </div>
                         </div>
-    
+                        <div class="form-row"> 
+                            <div class="form-group col">
+                                <label>Pin Code</label>
+                                <input type="text" class="form-control" (keyup)="getUserIdsFirstWay($event)" id="userIdFirstWay" list="dynmicUserIds" />
+                                <datalist id="dynmicUserIds" (change)="getAllAddressValue($event)">
+                                    <option *ngFor="let item of userList1" [value]="item.description">{{item.value}}</option>
+                                </datalist>
+                                <div *ngIf="submitted && registerForm.controls['pinCode']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['pinCode']?.errors?.['required']">Pin Code is required</div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="form-row"> 
+                            <div class="form-group col">
+                                <label>District</label>
+                                <input type="text" readonly formControlName="district" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['district']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['district']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['district']?.errors?.['required']">District Name is required</div>
+                                </div>
+                            </div>  
+                            <div class="form-group col">
+                                <label>State</label>
+                                <input type="text"  readonly formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['state']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['state']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['state']?.errors?.['required']">State Name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col">
+                                <label>Country</label>
+                                <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['country']?.errors }">
+                                <div *ngIf="submitted && registerForm.controls['country']?.errors" class="invalid-feedback">
+                                    <div *ngIf="registerForm.controls['country']?.errors?.['required']">Country Name is required</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-row">                       
                             <div class="form-group col">
                                 <label>Address</label>
@@ -153,13 +187,6 @@
                                 <div *ngIf="submitted && registerForm.controls['landmark']?.errors" class="invalid-feedback">
                                     <div *ngIf="registerForm.controls['landmark']?.errors?.['required']">Landmark is required</div>
                                 </div>
-                            </div>
-                            <div class="form-group col">
-                                <label>Zip Code</label>
-                                <input type="text" formControlName="zipCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['zipCode']?.errors }">
-                                <div *ngIf="submitted && registerForm.controls['zipCode']?.errors" class="invalid-feedback">
-                                    <div *ngIf="registerForm.controls['zipCode']?.errors?.['required']">Zip Code is required</div>
-                                </div>
                             </div> 
                             <div class="form-group col">
                                 <label>City</label>
@@ -169,29 +196,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row"> 
-                            <div class="form-group col">
-                                <label>District</label>
-                                <input type="text" formControlName="district" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['district']?.errors }">
-                                <div *ngIf="submitted && registerForm.controls['district']?.errors" class="invalid-feedback">
-                                    <div *ngIf="registerForm.controls['district']?.errors?.['required']">District Name is required</div>
-                                </div>
-                            </div>  
-                            <div class="form-group col">
-                                <label>State</label>
-                                <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['state']?.errors }">
-                                <div *ngIf="submitted && registerForm.controls['state']?.errors" class="invalid-feedback">
-                                    <div *ngIf="registerForm.controls['state']?.errors?.['required']">State Name is required</div>
-                                </div>
-                            </div>
-                            <div class="form-group col">
-                                <label>Country</label>
-                                <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['country']?.errors }">
-                                <div *ngIf="submitted && registerForm.controls['country']?.errors" class="invalid-feedback">
-                                    <div *ngIf="registerForm.controls['country']?.errors?.['required']">Country Name is required</div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="form-row">                       
                             <div class="form-group col">
                                 <label>Technical Qualification</label>

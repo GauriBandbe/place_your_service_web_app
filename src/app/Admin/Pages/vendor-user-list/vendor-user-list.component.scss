@@ -57,3 +57,14 @@
 {
     margin-top: 25px;
 }
+
+.example-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 440px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
