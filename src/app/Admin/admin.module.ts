@@ -4,9 +4,11 @@ import { AdminSharedModule } from './Shared/admin-shared.module';
 import { AdminAuthModule } from './admin-auth/admin-auth.module';
 import { ToastrService } from 'ngx-toastr';
 
-
 @NgModule({
   declarations: [   
+  
+  
+    
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,156 @@
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  margin: 0;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+.m-3 {
+  margin-top: 1rem !important;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  //border: 1px solid ;
+  border-radius: 0.25rem;
+}
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-top: 0%;
+  margin-bottom: 0;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+@mixin mat-icon($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  color:white;
+}
+
+@mixin mat-headline {
+  margin: 0px;
+  color: white;
+}
+
+@mixin dashcard($theme) {
+
+  .dashcard {
+      margin: 10px 18px;
+      height: 100px;
+      background-color:white;border-radius: 10px
+  }
+  .mat-icon {
+      @include mat-icon(40px);
+  }
+  .border-top {
+      border-top: 10px solid white;
+      font-weight: 500
+  }
+  .mat-headline {
+      @include mat-headline();
+  }
+  .mat-body-1{
+      @include mat-headline();
+  }
+}
+.nav-item {
+transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+cursor: default;
+
+&:hover {
+  transform: translate(0, -8px);
+  box-shadow: 0 20px 20px rgba(0, 0, 0, .16)
+}
+}
+
+/************************For Patient card**************************/
+
+/*********************************For Hospital***************************/
+@at-root.share-price{
+    margin: 10px 45px;
+    height: 255px;
+    margin: 10px;
+   // background:#4DB6AC;
+    background:#b4a7d6;
+   // background:mediumturquoise;
+    //background:mediumaquamarine;
+    text-align: center;  
+  
+}
+.nav-item {
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: default;
+
+  &:hover {
+    transform: translate(0, -8px);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, .16)
+  }
+}
+
+.share-price:hover {
+  transform: scale(1.05);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, .16)
+}
+.mat-card-image:first-child {
+  margin-top: 14px;
+  margin-bottom: 14px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.NewRequest-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #ED8F2D;
+}
+.InProgress-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #6BB5EA;
+}
+.Completed-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #18D184;
+}
+.Cancelled-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #C8281E;
+}
+.form-control{
+  //display: block;
+  margin-left: 10px;
+  //margin-right: 10px;
+  // width: 10%;
+  text-align: center;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding-left: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #5c6873;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1.5px solid #e4e7ea;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

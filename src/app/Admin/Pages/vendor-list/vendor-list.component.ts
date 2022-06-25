@@ -9,9 +9,7 @@ import { AdminService } from '../../Services/admin.service';
 let TechUserData =[];
 //Sweet Alerts
 import Swal from 'sweetalert2';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { GlobalConstants } from 'src/app/GlobalConstants';
-import { FasDirective } from 'angular-bootstrap-md';
 export interface UserData {
   vendorName: string;
   vendorGST: string;

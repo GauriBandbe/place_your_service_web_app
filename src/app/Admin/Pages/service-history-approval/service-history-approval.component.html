@@ -1,0 +1,95 @@
+
+<mat-card-title>
+    <div class="title-section" style="margin-left: 3%;">
+      <mat-icon class="maticon" style="font-weight: 500;margin-top: 1%;color: #8A92A6;" routerLink="/Admin/Dashboard">arrow_back</mat-icon>  
+      <span class="form-title" style="color:#ED8F2D !important;font-weight: 500; font-family: Roboto;
+      margin-left: 2%;line-height: 175%;"> Service History</span>
+      <span class="name role-name" fxHide fxShow.gt-xs></span>
+      <div class="add-patient-btn" >
+   </div>
+    </div>  
+      
+</mat-card-title>  
+<div class="card m-3 mat-elevation-z8">
+    <div class="card-body">
+        <div style="background-color: #F5F5F5;" fxLayout="row" fxLayout="row wrap" >
+            <div *ngFor="let dash of dashCard" fxFlex="100" fxFlex.lt-sm="100" fxFlex.lt-md="100" 
+            style="padding-bottom: 14px;" >
+            
+                 <div  fxLayout="row"  class="dashcard mat-elevation-z4 "  
+                 style="height: 130px;background: white;border: 1px solid red;" >
+                  <div fxFlex="10"fxLayout="column" fxLayoutAlign="center center" >
+                   <div>
+                    <img src='./../../../../assets/images/Rectangle.png' 
+                    style="margin-left: -20%;margin-bottom: 97%;height: 57px;">
+                   
+                   </div>
+                 </div>
+                 <div fxFlex="90" fxLayout="column" fxLayoutAlign="center center" >
+                    <div fxLayout="row"  style="width: 100%;">
+                        <div fxFlex="50" fxLayout="column" >
+                            <p  style="color: black;margin: 6px 0px 0px 6px;">
+                                Amit Rane
+                              </p>
+                              <p  style="color: black;margin: 6px 0px 0px 6px;">
+                                +91 9833******
+                              </p>
+                              <p  style="color: #8A92A6;margin: 6px 0px 0px 6px;font-size: 18px;">
+                                AC Not Working / Fan & Cooling Not Happening
+                              </p>
+                              <p  style="color: black;margin: 6px 0px 0px 6px;">
+                                12/ 1301 Mira Apartment
+                              </p>
+                              <p  style="color: black;margin: 6px 0px 0px 6px;">
+                                lokhandwalAndheri Mumbai- 40043
+                              </p>
+                        </div>
+                        <div fxFlex="50" fxLayout="column" >
+                            <div class="form-row">
+                                <div class="form-group col" style="margin-top: 5px">
+                                  
+                                    <input type="date"  class="form-control"  style="text-align: left;" 
+                                    style="font-family: Roboto;" >
+                                    <img src='./../../../../assets/images/24.png' 
+                                    style="margin-left: 6%;">  
+                                    <span style="color: #8A92A6;margin-left: 4%;">10.00 am To 10.30 am</span> 
+                                </div> 
+                               
+                                <div class="form-group col">
+                                    
+                                       </div> 
+                                <div class="form-group col">
+                                  
+                                </div> 
+                            </div>
+                            <hr style="width:90%;text-align:left;margin-left:0">
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <select  class="form-control" style="text-align: left;">
+                                        <option value="0">Assign Technician</option>
+                                        <option value="M">Ram Kanade</option>
+                                        <option value="F">Jivan Varma</option>
+                                        <option value="T">Dinesh Chavan</option>
+                                    </select>
+                                    <button style="background-color: #ED8F2D;color: #fff;border: 1px solid transparent;margin-right: 0.25rem!important;
+                                    border: 1px solid transparent;
+                                    padding: 0.375rem 0.75rem;
+                                    font-size: 1rem;
+                                    line-height: 1.5;margin-left: 28%;
+                                    border-radius: 0.25rem;margin-bottom: 30px;"
+                                    (click)="ApproveServiceStatus()">Accept</button>
+                                    
+                                </div> 
+                                
+                            </div>
+                        </div>
+                    </div>
+                   
+                      
+                 </div>
+              </div>
+             </div>
+             
+           </div>
+    </div>
+</div>
